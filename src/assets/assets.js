@@ -10,6 +10,15 @@ export const assets = {
     menu_icon,
     header_img,
 }
+export const specialities = [
+    'General physician',
+    'Gynecologist',
+    'Dermatologist',
+    'Pediatricians',
+    'Neurologist',
+    'Gastroenterologist',
+    'Cardiologist'
+]
 
 export const doctors = [
     {
@@ -31,6 +40,7 @@ export const doctors = [
         _id: 'doc2',
         name: 'Dr. Emily Larson',
         image: doc1,
+        available: true,
         speciality: 'Gynecologist',
         degree: 'MBBS',
         experience: '3 Years',
@@ -60,6 +70,7 @@ export const doctors = [
         _id: 'doc4',
         name: 'Dr. Christopher Lee',
         image: doc1,
+        available: true,
         speciality: 'Pediatricians',
         degree: 'MBBS',
         experience: '2 Years',
@@ -118,6 +129,7 @@ export const doctors = [
         _id: 'doc8',
         name: 'Dr. Timothy White',
         image: doc1,
+        available: true,
         speciality: 'Gynecologist',
         degree: 'MBBS',
         experience: '3 Years',
@@ -161,6 +173,7 @@ export const doctors = [
         _id: 'doc11',
         name: 'Dr. Zoe Kelly',
         image: doc1,
+        available: true,
         speciality: 'Neurologist',
         degree: 'MBBS',
         experience: '4 Years',
@@ -219,6 +232,7 @@ export const doctors = [
         _id: 'doc15',
         name: 'Dr. Amelia Hill',
         image: doc1,
+        available: true,
         speciality: 'Dermatologist',
         degree: 'MBBS',
         experience: '1 Years',
