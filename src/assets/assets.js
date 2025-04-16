@@ -3,12 +3,16 @@ import logo from './logo.svg';
 import menu_icon from './menu_icon.svg';
 import header_img from './header_img.png';
 import doc1 from './doc1.png';
+import verified_icon from './verified_icon.svg';
+import info_icon from './info_icon.svg';
 
 export const assets = {
     dropdown_icon,
     logo,
     menu_icon,
     header_img,
+    verified_icon,
+    info_icon
 }
 export const specialities = [
     'General physician',
