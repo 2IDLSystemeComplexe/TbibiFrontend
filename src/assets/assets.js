@@ -6,6 +6,7 @@ import doc1 from './doc1.png';
 import verified_icon from './verified_icon.svg';
 import info_icon from './info_icon.svg';
 import { MdEmail } from 'react-icons/md';
+import about_img from './about_image.png';
 
 export const assets = {
     dropdown_icon,
@@ -13,28 +14,28 @@ export const assets = {
     menu_icon,
     header_img,
     verified_icon,
-    info_icon
+    info_icon,
+    about_img
 }
 
 // Sample mock data for UI preview
 
-export const sampleAppointments = [
+export const myAppointments = [
     {
       _id: '1',
-      docData: {
+      doctorData: {
         name: 'Dr. Emily Stone',
         speciality: 'Cardiologist',
         image: doc1,
         address: {
-          line1: '123 Main St',
-          line2: 'Suite 500, New York, NY',
+          street: '123 Main St',
+          city: 'Suite 500, New York, NY',
         },
       },
-      slotDate: '20_01_2025',
-      slotTime: '10:30 AM',
+      date: '20_01_2025',
+      time: '10:30 AM',
       payment: null,
-      cancelled: false,
-      isCompleted: false,
+      status: 'Pending',
       mode: 'online'
     },
     {
@@ -51,8 +52,7 @@ export const sampleAppointments = [
       slotDate: '22_02_2025',
       slotTime: '2:00 PM',
       payment: true,
-      cancelled: false,
-      isCompleted: false,
+      status: 'Confirmed',
     },
   ];
 export const userData = {
