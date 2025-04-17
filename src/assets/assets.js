@@ -5,6 +5,7 @@ import header_img from './header_img.png';
 import doc1 from './doc1.png';
 import verified_icon from './verified_icon.svg';
 import info_icon from './info_icon.svg';
+import { MdEmail } from 'react-icons/md';
 
 export const assets = {
     dropdown_icon,
@@ -13,6 +14,53 @@ export const assets = {
     header_img,
     verified_icon,
     info_icon
+}
+
+// Sample mock data for UI preview
+
+export const sampleAppointments = [
+    {
+      _id: '1',
+      docData: {
+        name: 'Dr. Emily Stone',
+        speciality: 'Cardiologist',
+        image: doc1,
+        address: {
+          line1: '123 Main St',
+          line2: 'Suite 500, New York, NY',
+        },
+      },
+      slotDate: '20_01_2025',
+      slotTime: '10:30 AM',
+      payment: null,
+      cancelled: false,
+      isCompleted: false,
+      mode: 'online'
+    },
+    {
+      _id: '2',
+      docData: {
+        name: 'Dr. John Smith',
+        speciality: 'Dermatologist',
+        image: doc1,
+        address: {
+          line1: '456 Skin Ave',
+          line2: 'Los Angeles, CA',
+        },
+      },
+      slotDate: '22_02_2025',
+      slotTime: '2:00 PM',
+      payment: true,
+      cancelled: false,
+      isCompleted: false,
+    },
+  ];
+export const userData = {
+    name:"John Doe",
+    email:"john@gmail.com",
+    phone:"1234567890",
+    address:"123 Main St, Anytown, USA",
+    
 }
 export const specialities = [
     'General physician',
@@ -38,7 +86,12 @@ export const doctors = [
         address: {
             line1: '17th Cross, Richmond',
             line2: 'Circle, Ring Road, London'
-        }
+        },
+        doctorAvailability : [
+            { day: 'Monday', start: '09:00', end: '17:00' },
+            { day: 'Wednesday', start: '10:00', end: '18:00' },
+            { day: 'Friday', start: '08:00', end: '16:00' }
+        ]
     },
     {
         _id: 'doc2',
@@ -53,7 +106,12 @@ export const doctors = [
         address: {
             line1: '27th Cross, Richmond',
             line2: 'Circle, Ring Road, London'
-        }
+        }, 
+        doctorAvailability : [
+            { day: 'Monday', start: '09:00', end: '17:00' },
+            { day: 'Wednesday', start: '10:00', end: '18:00' },
+            { day: 'Friday', start: '08:00', end: '16:00' }
+        ]
     },
     {
         _id: 'doc3',
@@ -69,6 +127,11 @@ export const doctors = [
             line1: '37th Cross, Richmond',
             line2: 'Circle, Ring Road, London'
         },
+        doctorAvailability : [
+            { day: 'Monday', start: '09:00', end: '17:00' },
+            { day: 'Wednesday', start: '10:00', end: '18:00' },
+            { day: 'Friday', start: '08:00', end: '16:00' }
+        ]
     },
     {
         _id: 'doc4',
@@ -83,7 +146,12 @@ export const doctors = [
         address: {
             line1: '47th Cross, Richmond',
             line2: 'Circle, Ring Road, London'
-        }
+        },
+        doctorAvailability : [
+            { day: 'Monday', start: '09:00', end: '17:00' },
+            { day: 'Wednesday', start: '10:00', end: '18:00' },
+            { day: 'Friday', start: '08:00', end: '16:00' }
+        ]
     },
     {
         _id: 'doc5',
@@ -98,7 +166,12 @@ export const doctors = [
         address: {
             line1: '57th Cross, Richmond',
             line2: 'Circle, Ring Road, London'
-        }
+        },
+        doctorAvailability : [
+            { day: 'Monday', start: '09:00', end: '17:00' },
+            { day: 'Wednesday', start: '10:00', end: '18:00' },
+            { day: 'Friday', start: '08:00', end: '16:00' }
+        ]
     },
     {
         _id: 'doc6',
@@ -112,7 +185,12 @@ export const doctors = [
         address: {
             line1: '57th Cross, Richmond',
             line2: 'Circle, Ring Road, London'
-        }
+        },
+        doctorAvailability : [
+            { day: 'Monday', start: '09:00', end: '17:00' },
+            { day: 'Wednesday', start: '10:00', end: '18:00' },
+            { day: 'Friday', start: '08:00', end: '16:00' }
+        ]
     },
     {
         _id: 'doc7',
@@ -127,7 +205,12 @@ export const doctors = [
         address: {
             line1: '17th Cross, Richmond',
             line2: 'Circle, Ring Road, London'
-        }
+        },
+        doctorAvailability : [
+            { day: 'Monday', start: '09:00', end: '17:00' },
+            { day: 'Wednesday', start: '10:00', end: '18:00' },
+            { day: 'Friday', start: '08:00', end: '16:00' }
+        ]
     },
     {
         _id: 'doc8',
@@ -142,7 +225,12 @@ export const doctors = [
         address: {
             line1: '27th Cross, Richmond',
             line2: 'Circle, Ring Road, London'
-        }
+        },
+        doctorAvailability : [
+            { day: 'Monday', start: '09:00', end: '17:00' },
+            { day: 'Wednesday', start: '10:00', end: '18:00' },
+            { day: 'Friday', start: '08:00', end: '16:00' }
+        ]
     },
     {
         _id: 'doc9',
@@ -157,7 +245,12 @@ export const doctors = [
         address: {
             line1: '37th Cross, Richmond',
             line2: 'Circle, Ring Road, London'
-        }
+        },
+        doctorAvailability : [
+            { day: 'Monday', start: '09:00', end: '17:00' },
+            { day: 'Wednesday', start: '10:00', end: '18:00' },
+            { day: 'Friday', start: '08:00', end: '16:00' }
+        ]
     },
     {
         _id: 'doc10',
@@ -171,7 +264,12 @@ export const doctors = [
         address: {
             line1: '47th Cross, Richmond',
             line2: 'Circle, Ring Road, London'
-        }
+        },
+        doctorAvailability : [
+            { day: 'Monday', start: '09:00', end: '17:00' },
+            { day: 'Wednesday', start: '10:00', end: '18:00' },
+            { day: 'Friday', start: '08:00', end: '16:00' }
+        ]
     },
     {
         _id: 'doc11',
@@ -186,7 +284,12 @@ export const doctors = [
         address: {
             line1: '57th Cross, Richmond',
             line2: 'Circle, Ring Road, London'
-        }
+        },
+        doctorAvailability : [
+            { day: 'Monday', start: '09:00', end: '17:00' },
+            { day: 'Wednesday', start: '10:00', end: '18:00' },
+            { day: 'Friday', start: '08:00', end: '16:00' }
+        ]
     },
     {
         _id: 'doc12',
@@ -200,7 +303,12 @@ export const doctors = [
         address: {
             line1: '57th Cross, Richmond',
             line2: 'Circle, Ring Road, London'
-        }
+        },
+        doctorAvailability : [
+            { day: 'Monday', start: '09:00', end: '17:00' },
+            { day: 'Wednesday', start: '10:00', end: '18:00' },
+            { day: 'Friday', start: '08:00', end: '16:00' }
+        ]
     },
     {
         _id: 'doc13',
@@ -215,7 +323,12 @@ export const doctors = [
         address: {
             line1: '17th Cross, Richmond',
             line2: 'Circle, Ring Road, London'
-        }
+        },
+        doctorAvailability : [
+            { day: 'Monday', start: '09:00', end: '17:00' },
+            { day: 'Wednesday', start: '10:00', end: '18:00' },
+            { day: 'Friday', start: '08:00', end: '16:00' }
+        ]
     },
     {
         _id: 'doc14',
@@ -230,7 +343,12 @@ export const doctors = [
         address: {
             line1: '27th Cross, Richmond',
             line2: 'Circle, Ring Road, London'
-        }
+        },
+        doctorAvailability : [
+            { day: 'Monday', start: '09:00', end: '17:00' },
+            { day: 'Wednesday', start: '10:00', end: '18:00' },
+            { day: 'Friday', start: '08:00', end: '16:00' }
+        ]
     },
     {
         _id: 'doc15',
@@ -245,6 +363,11 @@ export const doctors = [
         address: {
             line1: '37th Cross, Richmond',
             line2: 'Circle, Ring Road, London'
-        }
+        },
+        doctorAvailability : [
+            { day: 'Monday', start: '09:00', end: '17:00' },
+            { day: 'Wednesday', start: '10:00', end: '18:00' },
+            { day: 'Friday', start: '08:00', end: '16:00' }
+        ]
     },
 ]

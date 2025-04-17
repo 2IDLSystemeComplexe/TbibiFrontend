@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 // import { AppContext } from '../context/AppContext'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import {doctors, specialities} from '../assets/assets'
 
 const Doctors = () => {
 
-  const { speciality } = useParams()
+  const [searchParams] = useSearchParams()
+  const speciality = searchParams.get('speciality');
 
   const [filteredDoctors, setFilteredDoctors] = useState([])
   const [showFilter, setShowFilter] = useState(false)
@@ -32,7 +33,7 @@ const Doctors = () => {
         <button onClick={() => setShowFilter(!showFilter)} className={`py-1 px-3 border rounded text-sm  transition-all sm:hidden ${showFilter ? 'bg-primary text-white' : ''}`}>Filters</button>
         <div className={`flex-col gap-4 text-sm text-gray-600 ${showFilter ? 'flex' : 'hidden sm:flex'}`}>
           {specialities.map((spec, index) => (
-            <p onClick={() => speciality === spec ? navigate('/doctors') : navigate(`/doctors/${spec}`)} className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === spec ? 'bg-[#E2E5FF] text-black ' : ''}`} key={index}>{spec}</p>
+            <p onClick={() => speciality === spec ? navigate('/doctors') : navigate(`/doctors?speciality=${spec}`)} className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === spec ? 'bg-[#E2E5FF] text-black ' : ''}`} key={index}>{spec}</p>
           ))}
         </div>
         <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 pt-5 gap-y-6 px-3 sm:px-0'>
