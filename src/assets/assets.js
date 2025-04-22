@@ -40,17 +40,17 @@ export const myAppointments = [
     },
     {
       _id: '2',
-      docData: {
+      doctorData: {
         name: 'Dr. John Smith',
         speciality: 'Dermatologist',
         image: doc1,
         address: {
-          line1: '456 Skin Ave',
-          line2: 'Los Angeles, CA',
+            street: '456 Skin Ave',
+            city: 'Los Angeles, CA',
         },
       },
-      slotDate: '22_02_2025',
-      slotTime: '2:00 PM',
+      date: '22_02_2025',
+      time: '2:00 PM',
       payment: true,
       status: 'Confirmed',
     },
