@@ -1,5 +1,9 @@
 import { motion } from 'framer-motion';
 import { assets } from '../assets/assets';
+import { FaLock, FaRegCalendarCheck } from "react-icons/fa6";
+import { AiOutlineClockCircle } from "react-icons/ai";
+import { MdOutlinePriceCheck, MdAccessTimeFilled, MdVerifiedUser } from "react-icons/md";
+import { HiMiniComputerDesktop } from "react-icons/hi2";
 
 const About = () => {
   // Animation variants
@@ -27,22 +31,22 @@ const About = () => {
 
   const features = [
     {
-      icon: assets.verified_icon,
+      icon: <FaRegCalendarCheck />,
       title: "Easy Booking",
       description: "Schedule appointments in just a few clicks with our intuitive interface."
     },
     {
-      icon: assets.verified_icon,
+      icon: <AiOutlineClockCircle />,
       title: "Time Saving",
       description: "Reduce waiting times and manage your healthcare efficiently."
     },
     {
-      icon: assets.verified_icon,
+      icon: <HiMiniComputerDesktop />,
       title: "Virtual Visits",
       description: "Connect with doctors from the comfort of your home."
     },
     {
-      icon: assets.verified_icon,
+      icon: <FaLock/>,
       title: "Secure",
       description: "Your data is protected with industry-standard security measures."
     }
@@ -153,17 +157,17 @@ const About = () => {
             {
               title: "Verified Professionals",
               description: "All doctors are thoroughly vetted and licensed.",
-              icon: assets.verified_icon
+              icon: <MdVerifiedUser/>
             },
             {
               title: "24/7 Availability",
               description: "Book appointments anytime that works for you.",
-              icon: assets.verified_icon
+              icon:  <MdAccessTimeFilled/>
             },
             {
               title: "Transparent Pricing",
               description: "No hidden fees, know the cost upfront.",
-              icon: assets.verified_icon
+              icon: <MdOutlinePriceCheck/>
             }
           ].map((item, index) => (
             <motion.div
@@ -173,7 +177,7 @@ const About = () => {
               className="bg-white p-6 rounded-xl shadow-sm border border-gray-200"
             >
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                <img src={item.icon} alt={item.title} className="w-6 h-6" />
+                {item.icon}
               </div>
               <h3 className="text-xl font-semibold text-gray-800 mb-2">{item.title}</h3>
               <p className="text-gray-600">{item.description}</p>
@@ -201,7 +205,8 @@ const About = () => {
               className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 text-center"
             >
               <div className="w-14 h-14 bg-[#EAEFFF] rounded-full flex items-center justify-center mx-auto mb-4">
-                <img src={feature.icon} alt={feature.title} className="w-6 h-6" />
+                {/* <img src={feature.icon} alt={feature.title} className="w-6 h-6" /> */}
+                {feature.icon}
               </div>
               <h3 className="text-lg font-semibold text-gray-800 mb-2">{feature.title}</h3>
               <p className="text-gray-600 text-sm">{feature.description}</p>
