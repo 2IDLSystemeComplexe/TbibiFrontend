@@ -20,3 +20,12 @@ const PrescriptionPage = () => {
 
 export default PrescriptionPage;
 */
+import React from 'react'
+
+const PrescriptionPage = () => {
+  return (
+    <div>PrescriptionPage</div>
+  )
+}
+
+export default PrescriptionPage

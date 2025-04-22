@@ -5,7 +5,7 @@ import header_img from './header_img.png';
 import doc1 from './doc1.png';
 import verified_icon from './verified_icon.svg';
 import info_icon from './info_icon.svg';
-import { MdEmail } from 'react-icons/md';
+import upload_area from './upload_area.svg';
 
 export const assets = {
     dropdown_icon,
@@ -13,7 +13,8 @@ export const assets = {
     menu_icon,
     header_img,
     verified_icon,
-    info_icon
+    info_icon,
+    upload_area
 }
 
 // Sample mock data for UI preview
