@@ -93,13 +93,13 @@ const About = () => {
         <div>
           <motion.h2 
             variants={itemVariants}
-            className="text-3xl font-semibold text-gray-800 mb-6"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-semibold text-gray-800 mb-4 sm:mb-6"
           >
             About Us
           </motion.h2>
           <motion.p 
             variants={itemVariants}
-            className="text-gray-600 mb-6"
+            className="text-base sm:text-lg md:text-xl text-gray-600 mb-4 sm:mb-6"
           >
             Welcome to Tbibi, your trusted partner in managing your healthcare needs conveniently and efficiently. <br/><br />
             At Tbibi, we understand the challenges of accessing quality healthcare.
@@ -107,13 +107,13 @@ const About = () => {
             Our platform bridges the gap between patients and healthcare providers, 
             offering seamless appointment scheduling, secure video consultations, and comprehensive 
             medical record management. <br/><br/>
-           
+            
             Tbibi is committed to excellence in healthcare technology. We continuously strive to enhance our platform, integrating the latest advancements to improve user experience and deliver superior service.
             Whether you're booking your first appointment or managing ongoing care, Prescripto is here to support you every step of the way.
           </motion.p>
           <motion.p 
             variants={itemVariants}
-            className="text-gray-600"
+            className="text-base sm:text-lg md:text-xl text-gray-600"
           >
             Designed with both patients and doctors in mind, we prioritize accessibility, 
             convenience, and quality care in every interaction.

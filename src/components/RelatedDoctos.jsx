@@ -8,7 +8,7 @@ const RelatedDoctos = ({speciality, docId}) => {
 
     useEffect(() => {
         if (doctors.length > 0 && speciality) {
-            const doctorsData = doctors.filter((doc) => doc.speciality === speciality && doc._id !== docId)
+            const doctorsData = doctors.filter((doc) => doc.specialization === speciality && doc._id !== docId)
             setRelatedDoctors(doctorsData)
         }
     }, [doctors, speciality, docId])
@@ -25,7 +25,7 @@ const RelatedDoctos = ({speciality, docId}) => {
                             <p className={`w-2 h-2 rounded-full ${doctor.available ? 'bg-green-500' : "bg-gray-500"}`}></p><p>{doctor.available ? 'Available' : "Not Available"}</p>
                         </div>
                         <p className='text-[#262626] text-lg font-medium'>{doctor.name}</p>
-                        <p className='text-[#5C5C5C] text-sm'>{doctor.speciality}</p>
+                        <p className='text-[#5C5C5C] text-sm'>{doctor.specialization}</p>
                     </div>
                 </div>
             ))}
