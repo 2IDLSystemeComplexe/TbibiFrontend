@@ -20,6 +20,7 @@ import AppointmentsPage from './pages/AppointmentsPage'
 import AvailabilityPage from './pages/AvailabilityPage'
 import DoctorProfilePage from './pages/DoctorProfilePage'
 import AddDoctor from './pages/AddDoctor'
+import ManageUsers from './pages/ManageUsers'
  
  const App = () => {
   return (
@@ -44,6 +45,7 @@ import AddDoctor from './pages/AddDoctor'
         <Route path="/dashboard-medecin/availability" element={<AvailabilityPage />} />
         <Route path="/dashboard-medecin/profile" element={<DoctorProfilePage />} />
         <Route path="/dashboard-admin/add-doctor" element={<AddDoctor />} />
+        <Route path="/admin/manage-users" element={<ManageUsers />} />
 
       </Routes>
       <Footer />

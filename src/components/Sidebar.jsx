@@ -26,7 +26,8 @@ const Sidebar = ({ role = "doctor" }) => {
 
         {role === 'admin' && (
           <>
-            <a href="/dashboard-admin" className="block text-gray-700 hover:text-blue-600">👥 Utilisateurs</a>
+            <a href="/dashboard-admin" className="block text-gray-700 hover:text-blue-600">🏠 Tableau de bord</a>
+            <a href="/admin/manage-users" className="block text-gray-700 hover:text-blue-600">👥 Gérer utilisateurs</a>
             <a href="/dashboard-admin/add-doctor" className="block text-gray-700 hover:text-blue-600">🩺 Ajouter médecin</a>
             <a href="#" className="block text-gray-700 hover:text-blue-600">📊 Statistiques</a>
             <a href="#" className="block text-gray-700 hover:text-blue-600">⚙️ Paramètres</a>
