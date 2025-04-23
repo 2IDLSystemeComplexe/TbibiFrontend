@@ -12,7 +12,17 @@ import Footer from './components/Footer'
 import DoctorDetails from './pages/DoctorDetails'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-const App = () => {
+import DoctorDashboard from './pages/DoctorDashboard'
+import AdminDashboard from './pages/AdminDashboard'
+import PatientPages from './pages/PatientsPage'
+import PrescriptionsPage from './pages/PrescriptionPage'
+import AppointmentsPage from './pages/AppointmentsPage'
+import AvailabilityPage from './pages/AvailabilityPage'
+import DoctorProfilePage from './pages/DoctorProfilePage'
+import AddDoctor from './pages/AddDoctor'
+import ManageUsers from './pages/ManageUsers'
+ 
+ const App = () => {
   return (
     <div className='mx-4 sm:mx-[10%]'>
       <ToastContainer />
@@ -27,6 +37,16 @@ const App = () => {
         <Route path='/contact' element={<Contact />} />
         <Route path="/my-appointments" element={<MyAppointments/>} />
         <Route path="/my-profile" element={<MyProfile/>} />
+        <Route path="/dashboard-medecin" element={<DoctorDashboard />} />
+        <Route path="/dashboard-admin" element={<AdminDashboard />} />
+        <Route path="/dashboard-medecin/patients" element={<PatientPages />} />
+        <Route path="/dashboard-medecin/prescriptions" element={<PrescriptionsPage />} />
+        <Route path="/dashboard-medecin/appointments" element={<AppointmentsPage />} />
+        <Route path="/dashboard-medecin/availability" element={<AvailabilityPage />} />
+        <Route path="/dashboard-medecin/profile" element={<DoctorProfilePage />} />
+        <Route path="/dashboard-admin/add-doctor" element={<AddDoctor />} />
+        <Route path="/admin/manage-users" element={<ManageUsers />} />
+
       </Routes>
       <Footer />
     </div>
