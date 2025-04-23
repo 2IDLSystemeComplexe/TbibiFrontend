@@ -28,10 +28,11 @@ export const myAppointments = [
         name: 'Dr. Emily Stone',
         speciality: 'Cardiologist',
         image: doc1,
-        address: {
-          street: '123 Main St',
-          city: 'Suite 500, New York, NY',
+        localisation: {
+            street: '57th Cross, Richmond Circle, Ring Road',
+            city: 'London'
         },
+        phone: '+1 555-123-4567',
       },
       date: '20_01_2025',
       time: '10:30 AM',
@@ -45,10 +46,11 @@ export const myAppointments = [
         name: 'Dr. John Smith',
         speciality: 'Dermatologist',
         image: doc1,
-        address: {
-            street: '456 Skin Ave',
-            city: 'Los Angeles, CA',
+        localisation: {
+            street: '57th Cross, Richmond Circle, Ring Road',
+            city: 'Tunis'
         },
+        phone: '+1 555-123-4567',
       },
       date: '22_02_2025',
       time: '2:00 PM',
@@ -79,16 +81,17 @@ export const doctors = [
         name: 'Dr. Richard James',
         image: doc1,
         available: true,
-        speciality: 'General physician',
+        specialization: 'General physician',
         degree: 'MBBS',
         experience: '4 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 50,
-        address: {
-            line1: '17th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+        phone: '+1 555-123-4567',
+        localisation: {
+            street: '17th Cross, Richmond Circle, Ring Road',
+            city: 'London'
         },
-        doctorAvailability : [
+        availability: [
             { day: 'Monday', start: '09:00', end: '17:00' },
             { day: 'Wednesday', start: '10:00', end: '18:00' },
             { day: 'Friday', start: '08:00', end: '16:00' }
@@ -99,16 +102,17 @@ export const doctors = [
         name: 'Dr. Emily Larson',
         image: doc1,
         available: true,
-        speciality: 'Gynecologist',
+        specialization: 'Gynecologist',
         degree: 'MBBS',
         experience: '3 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 60,
-        address: {
-            line1: '27th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
-        }, 
-        doctorAvailability : [
+        phone: '+1 555-234-5678',
+        localisation: {
+            street: '27th Cross, Richmond Circle, Ring Road',
+            city: 'Tunis'
+        },
+        availability: [
             { day: 'Monday', start: '09:00', end: '17:00' },
             { day: 'Wednesday', start: '10:00', end: '18:00' },
             { day: 'Friday', start: '08:00', end: '16:00' }
@@ -119,16 +123,17 @@ export const doctors = [
         name: 'Dr. Sarah Patel',
         image: doc1,
         available: true,
-        speciality: 'Dermatologist',
+        specialization: 'Dermatologist',
         degree: 'MBBS',
         experience: '1 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 30,
-        address: {
-            line1: '37th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+        phone: '+1 555-345-6789',
+        localisation: {
+            street: '37th Cross, Richmond Circle, Ring Road',
+            city: 'London'
         },
-        doctorAvailability : [
+        availability: [
             { day: 'Monday', start: '09:00', end: '17:00' },
             { day: 'Wednesday', start: '10:00', end: '18:00' },
             { day: 'Friday', start: '08:00', end: '16:00' }
@@ -139,16 +144,17 @@ export const doctors = [
         name: 'Dr. Christopher Lee',
         image: doc1,
         available: true,
-        speciality: 'Pediatricians',
+        specialization: 'Pediatricians',
         degree: 'MBBS',
         experience: '2 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 40,
-        address: {
-            line1: '47th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+        phone: '+1 555-456-7890',
+        localisation: {
+            street: '47th Cross, Richmond Circle, Ring Road',
+            city: 'London'
         },
-        doctorAvailability : [
+        availability: [
             { day: 'Monday', start: '09:00', end: '17:00' },
             { day: 'Wednesday', start: '10:00', end: '18:00' },
             { day: 'Friday', start: '08:00', end: '16:00' }
@@ -158,17 +164,18 @@ export const doctors = [
         _id: 'doc5',
         name: 'Dr. Jennifer Garcia',
         image: doc1,
-        speciality: 'Neurologist',
+        specialization: 'Neurologist',
         degree: 'MBBS',
         experience: '4 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 50,
         available: true,
-        address: {
-            line1: '57th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+        phone: '+1 555-567-8901',
+        localisation: {
+            street: '57th Cross, Richmond Circle, Ring Road',
+            city: 'London'
         },
-        doctorAvailability : [
+        availability: [
             { day: 'Monday', start: '09:00', end: '17:00' },
             { day: 'Wednesday', start: '10:00', end: '18:00' },
             { day: 'Friday', start: '08:00', end: '16:00' }
@@ -178,16 +185,17 @@ export const doctors = [
         _id: 'doc6',
         name: 'Dr. Andrew Williams',
         image: doc1,
-        speciality: 'Neurologist',
+        specialization: 'Neurologist',
         degree: 'MBBS',
         experience: '4 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 50,
-        address: {
-            line1: '57th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+        phone: '+1 555-678-9012',
+        localisation: {
+            street: '57th Cross, Richmond Circle, Ring Road',
+            city: 'London'
         },
-        doctorAvailability : [
+        availability: [
             { day: 'Monday', start: '09:00', end: '17:00' },
             { day: 'Wednesday', start: '10:00', end: '18:00' },
             { day: 'Friday', start: '08:00', end: '16:00' }
@@ -198,16 +206,17 @@ export const doctors = [
         name: 'Dr. Christopher Davis',
         image: doc1,
         available: true,
-        speciality: 'General physician',
+        specialization: 'General physician',
         degree: 'MBBS',
         experience: '4 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 50,
-        address: {
-            line1: '17th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+        phone: '+1 555-789-0123',
+        localisation: {
+            street: '17th Cross, Richmond Circle, Ring Road',
+            city: 'London'
         },
-        doctorAvailability : [
+        availability: [
             { day: 'Monday', start: '09:00', end: '17:00' },
             { day: 'Wednesday', start: '10:00', end: '18:00' },
             { day: 'Friday', start: '08:00', end: '16:00' }
@@ -218,16 +227,17 @@ export const doctors = [
         name: 'Dr. Timothy White',
         image: doc1,
         available: true,
-        speciality: 'Gynecologist',
+        specialization: 'Gynecologist',
         degree: 'MBBS',
         experience: '3 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 60,
-        address: {
-            line1: '27th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+        phone: '+1 555-890-1234',
+        localisation: {
+            street: '27th Cross, Richmond Circle, Ring Road',
+            city: 'London'
         },
-        doctorAvailability : [
+        availability: [
             { day: 'Monday', start: '09:00', end: '17:00' },
             { day: 'Wednesday', start: '10:00', end: '18:00' },
             { day: 'Friday', start: '08:00', end: '16:00' }
@@ -238,16 +248,17 @@ export const doctors = [
         name: 'Dr. Ava Mitchell',
         image: doc1,
         available: true,
-        speciality: 'Dermatologist',
+        specialization: 'Dermatologist',
         degree: 'MBBS',
         experience: '1 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 30,
-        address: {
-            line1: '37th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+        phone: '+1 555-901-2345',
+        localisation: {
+            street: '37th Cross, Richmond Circle, Ring Road',
+            city: 'London'
         },
-        doctorAvailability : [
+        availability: [
             { day: 'Monday', start: '09:00', end: '17:00' },
             { day: 'Wednesday', start: '10:00', end: '18:00' },
             { day: 'Friday', start: '08:00', end: '16:00' }
@@ -257,16 +268,17 @@ export const doctors = [
         _id: 'doc10',
         name: 'Dr. Jeffrey King',
         image: doc1,
-        speciality: 'Pediatricians',
+        specialization: 'Pediatricians',
         degree: 'MBBS',
         experience: '2 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 40,
-        address: {
-            line1: '47th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+        phone: '+1 555-012-3456',
+        localisation: {
+            street: '47th Cross, Richmond Circle, Ring Road',
+            city: 'London'
         },
-        doctorAvailability : [
+        availability: [
             { day: 'Monday', start: '09:00', end: '17:00' },
             { day: 'Wednesday', start: '10:00', end: '18:00' },
             { day: 'Friday', start: '08:00', end: '16:00' }
@@ -277,16 +289,17 @@ export const doctors = [
         name: 'Dr. Zoe Kelly',
         image: doc1,
         available: true,
-        speciality: 'Neurologist',
+        specialization: 'Neurologist',
         degree: 'MBBS',
         experience: '4 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 50,
-        address: {
-            line1: '57th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+        phone: '+1 555-123-4567',
+        localisation: {
+            street: '57th Cross, Richmond Circle, Ring Road',
+            city: 'London'
         },
-        doctorAvailability : [
+        availability: [
             { day: 'Monday', start: '09:00', end: '17:00' },
             { day: 'Wednesday', start: '10:00', end: '18:00' },
             { day: 'Friday', start: '08:00', end: '16:00' }
@@ -296,16 +309,17 @@ export const doctors = [
         _id: 'doc12',
         name: 'Dr. Patrick Harris',
         image: doc1,
-        speciality: 'Neurologist',
+        specialization: 'Neurologist',
         degree: 'MBBS',
         experience: '4 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 50,
-        address: {
-            line1: '57th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+        phone: '+1 555-234-5678',
+        localisation: {
+            street: '57th Cross, Richmond Circle, Ring Road',
+            city: 'London'
         },
-        doctorAvailability : [
+        availability: [
             { day: 'Monday', start: '09:00', end: '17:00' },
             { day: 'Wednesday', start: '10:00', end: '18:00' },
             { day: 'Friday', start: '08:00', end: '16:00' }
@@ -316,16 +330,17 @@ export const doctors = [
         name: 'Dr. Chloe Evans',
         image: doc1,
         available: true,
-        speciality: 'General physician',
+        specialization: 'General physician',
         degree: 'MBBS',
         experience: '4 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 50,
-        address: {
-            line1: '17th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+        phone: '+1 555-345-6789',
+        localisation: {
+            street: '17th Cross, Richmond Circle, Ring Road',
+            city: 'London'
         },
-        doctorAvailability : [
+        availability: [
             { day: 'Monday', start: '09:00', end: '17:00' },
             { day: 'Wednesday', start: '10:00', end: '18:00' },
             { day: 'Friday', start: '08:00', end: '16:00' }
@@ -336,16 +351,17 @@ export const doctors = [
         name: 'Dr. Ryan Martinez',
         image: doc1,
         available: true,
-        speciality: 'Gynecologist',
+        specialization: 'Gynecologist',
         degree: 'MBBS',
         experience: '3 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 60,
-        address: {
-            line1: '27th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+        phone: '+1 555-456-7890',
+        localisation: {
+            street: '27th Cross, Richmond Circle, Ring Road',
+            city: 'London'
         },
-        doctorAvailability : [
+        availability: [
             { day: 'Monday', start: '09:00', end: '17:00' },
             { day: 'Wednesday', start: '10:00', end: '18:00' },
             { day: 'Friday', start: '08:00', end: '16:00' }
@@ -356,19 +372,20 @@ export const doctors = [
         name: 'Dr. Amelia Hill',
         image: doc1,
         available: true,
-        speciality: 'Dermatologist',
+        specialization: 'Dermatologist',
         degree: 'MBBS',
         experience: '1 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 30,
-        address: {
-            line1: '37th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+        phone: '+1 555-567-8901',
+        localisation: {
+            street: '37th Cross, Richmond Circle, Ring Road',
+            city: 'London'
         },
-        doctorAvailability : [
+        availability: [
             { day: 'Monday', start: '09:00', end: '17:00' },
             { day: 'Wednesday', start: '10:00', end: '18:00' },
             { day: 'Friday', start: '08:00', end: '16:00' }
         ]
-    },
+    }
 ]
