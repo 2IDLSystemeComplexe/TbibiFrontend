@@ -9,23 +9,29 @@ const staticAppointments = [
     patientName: 'Amel B.',
     date: '2025-04-25',
     time: '10:00',
-    status: 'pending'
+    status: 'pending',
+    meetingType: 'en ligne',
+    meetLink: 'https://meet.google.com/abc-defg-hij'
   },
   {
     id: 2,
     patientName: 'Mehdi K.',
     date: '2025-04-26',
     time: '14:30',
-    status: 'confirmed'
+    status: 'confirmed',
+    meetingType: 'présentiel'
   },
   {
     id: 3,
     patientName: 'Nour H.',
     date: '2025-04-27',
     time: '09:15',
-    status: 'rejected'
+    status: 'confirmed',
+    meetingType: 'en ligne',
+    meetLink: 'https://meet.google.com/xyz-1234-abcd'
   }
 ];
+
 
 const AppointmentsPage = () => {
   const handleAction = (id, status) => {
@@ -71,26 +77,39 @@ const AppointmentsPage = () => {
                         {rdv.status}
                       </span>
                     </td>
-                    <td className="px-4 py-2 border">
-                      {rdv.status === 'pending' ? (
-                        <div className="space-x-2">
-                          <button
-                            onClick={() => handleAction(rdv.id, 'confirmed')}
-                            className="bg-green-600 text-white text-sm px-3 py-1 rounded"
-                          >
-                            Confirmer
-                          </button>
-                          <button
-                            onClick={() => handleAction(rdv.id, 'rejected')}
-                            className="bg-red-600 text-white text-sm px-3 py-1 rounded"
-                          >
-                            Refuser
-                          </button>
-                        </div>
-                      ) : (
-                        <span className="text-gray-400 italic text-sm">Aucune action</span>
-                      )}
-                    </td>
+                <td className="px-4 py-2 border space-y-2">
+  {rdv.status === 'pending' ? (
+    <div className="space-x-2">
+      <button
+        onClick={() => handleAction(rdv.id, 'confirmed')}
+        className="bg-green-600 text-white text-sm px-3 py-1 rounded"
+      >
+        Confirmer
+      </button>
+      <button
+        onClick={() => handleAction(rdv.id, 'rejected')}
+        className="bg-red-600 text-white text-sm px-3 py-1 rounded"
+      >
+        Refuser
+      </button>
+    </div>
+  ) : (
+    <span className="text-gray-400 italic text-sm block">Aucune action</span>
+  )}
+
+  {/* Bouton Rejoindre si en ligne et confirmé */}
+  {rdv.status === 'confirmed' && rdv.meetingType === 'en ligne' && (
+    <a
+      href={rdv.meetLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-block bg-indigo-600 text-white text-sm px-3 py-1 rounded hover:bg-indigo-700 mt-2"
+    >
+      🎥 Rejoindre le meet
+    </a>
+  )}
+</td>
+
                   </tr>
                 ))}
               </tbody>
