@@ -8,6 +8,7 @@ import info_icon from './info_icon.svg';
 import about_img from './about_image.png';
 import upload_area from './upload_area.svg';
 
+
 export const assets = {
     dropdown_icon,
     logo,
@@ -16,7 +17,8 @@ export const assets = {
     verified_icon,
     info_icon,
     about_img,
-    upload_area
+    upload_area,
+    doc1
 }
 
 // Sample mock data for UI preview

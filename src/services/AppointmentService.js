@@ -1,11 +1,38 @@
 import axios from 'axios';
 
-export const getUserAppointments = async (backendUrl, token) => {
-  const { data } = await axios.get(`${backendUrl}/api/user/appointments`, {
-    headers: { token },
-  });
-  return data.appointments.reverse();
+export const getUserAppointments = async (backendUrl) => {
+  const token = localStorage.getItem('token');
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  if (!user || !token) throw new Error('User not authenticated');
+
+  const { _id, role } = user;
+
+  const { data } = await axios.get(`${backendUrl}/api/appointment/appointments/${role}/${_id}`,
+  );
+
+  return data; // already an array
 };
+
+
+
+
+/**
+ * Update the status of an appointment
+ * @param {string} backendUrl 
+ * @param {string} token
+ * @param {string} appointmentId 
+ * @param {string} status 
+ * @returns {Promise<Object>} 
+ */
+export const updateAppointmentStatus = async (backendUrl, appointmentId, status) => {
+  const { data } = await axios.put(
+    `${backendUrl}/api/appointment/appointments/${appointmentId}/status`,
+    { status }
+  );
+  return data;
+};
+
 
 export const bookAppointment = async (backendUrl, token, appointmentData) => {
   const { data } = await axios.post(
@@ -17,11 +44,11 @@ export const bookAppointment = async (backendUrl, token, appointmentData) => {
   return data;
 }
 
-export const cancelAppointment = async (backendUrl, token, appointmentId) => {
+export const cancelAppointment = async (backendUrl, appointmentId) => {
   const { data } = await axios.post(
-    `${backendUrl}/api/user/cancel-appointment`,
+    `${backendUrl}/api/appointment/appointments/${appointmentId}/status`,
     { appointmentId },
-    { headers: { token } }
+    
   );
   return data;
 };

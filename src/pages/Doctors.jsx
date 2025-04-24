@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { doctors, specialities } from '../assets/assets'
 
+
 const Doctors = () => {
   const [searchParams] = useSearchParams()
   const speciality = searchParams.get('speciality')
