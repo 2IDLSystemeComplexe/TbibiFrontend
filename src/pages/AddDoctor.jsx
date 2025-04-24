@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState , useContext } from 'react'
 import { assets, specialities } from '../assets/assets'
 import { toast } from 'react-toastify'
 import Sidebar from '../components/Sidebar'
 import HeaderDashboard from '../components/HeaderDashboard'
+import { AppContext } from '../context/AppContext'
+import { addDoctor } from '../services/DoctorService'
 
 const AddDoctor = () => {
 
@@ -17,42 +19,42 @@ const AddDoctor = () => {
     const [degree, setDegree] = useState('')
     const [address1, setAddress1] = useState('')
     const [address2, setAddress2] = useState('')
-
+    const { backendUrl } = useContext(AppContext)
     const onSubmitHandler = async (event) => {
-        event.preventDefault()
-
+        event.preventDefault();
+      
         try {
-
-            if (!docImg) {
-                return toast.error('Image Not Selected')
-            }
-
-            const formData = new FormData();
-
-            formData.append('image', docImg)
-            formData.append('name', name)
-            formData.append('email', email)
-            formData.append('password', password)
-            formData.append('experience', experience)
-            formData.append('fees', Number(fees))
-            formData.append('about', about)
-            formData.append('speciality', speciality)
-            formData.append('degree', degree)
-            formData.append('address', JSON.stringify({ line1: address1, line2: address2 }))
-
-            // console log formdata            
-            formData.forEach((value, key) => {
-                console.log(`${key}: ${value}`);
-            });
-            // TODO:  create doctor service call
-            
+          if (!docImg) {
+            return toast.error('Image Not Selected');
+          }
+      
+          const formData = new FormData();
+          formData.append('image', docImg);
+          formData.append('name', name);
+          formData.append('email', email);
+          formData.append('password', password);
+          formData.append('experience', experience);
+          formData.append('fees', Number(fees));
+          formData.append('about', about);
+          formData.append('speciality', speciality);
+          formData.append('degree', degree);
+          formData.append('address', JSON.stringify({ line1: address1, line2: address2 }));
+      
+          // Optional: log the form data
+          formData.forEach((value, key) => {
+            console.log(`${key}: ${value}`);
+          });
+      
+          const token = localStorage.getItem('token');
+      
+          const result = await addDoctor(backendUrl, formData, token);
+          toast.success('Doctor added successfully');
+          console.log(result);
         } catch (error) {
-            toast.error(error.message)
-            console.log(error)
+          toast.error(error.message);
+          console.error(error);
         }
-
-    }
-
+      };
     return (
         <div className="flex">
             <Sidebar role="admin" />

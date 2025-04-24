@@ -11,7 +11,7 @@ const DoctorDashboard = () => {
       <Sidebar role="doctor" />
 
       <div className="flex-1 bg-gray-100 min-h-screen">
-        <HeaderDashboard title="Dashboard Médecin" />
+        <HeaderDashboard title="Dashboard Médecin" profileRoute='/dashboard-medecin/profile'/>
 
         <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <Card title="Patients" value="48" icon="👥" />

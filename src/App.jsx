@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import Home from './pages/Home'
 import Doctors from './pages/Doctors'
 import About from './pages/About'
@@ -21,33 +21,89 @@ import AvailabilityPage from './pages/AvailabilityPage'
 import DoctorProfilePage from './pages/DoctorProfilePage'
 import AddDoctor from './pages/AddDoctor'
 import ManageUsers from './pages/ManageUsers'
- 
- const App = () => {
+import ProtectedRoute from './Auth/ProtectedRoute';
+
+const App = () => {
+  const location = useLocation()
+  const hideNavbarRoutes = [
+    '/dashboard-admin',
+    '/dashboard-admin/add-doctor',
+    '/admin/manage-users',
+    '/dashboard-medecin',
+    '/dashboard-medecin/patients',
+    '/dashboard-medecin/prescriptions',
+    '/dashboard-medecin/appointments',
+    '/dashboard-medecin/availability',
+    '/dashboard-medecin/profile'
+  ]
+
+  const shouldShowNavbar = !hideNavbarRoutes.includes(location.pathname)
+
   return (
     <div className='mx-4 sm:mx-[10%]'>
       <ToastContainer />
-      <Navbar />
+      {shouldShowNavbar && <Navbar />}
+
       <Routes>
+        {/* Public Routes */}
         <Route path='/' element={<Home />} />
-        <Route path='/doctors' element={<Doctors />} />
-        <Route path='/doctors/:docId' element={<DoctorDetails/>} />
-        <Route path='/doctors?speciality=:speciality' element={<Doctors />} />
         <Route path='/login' element={<Login />} />
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />
-        <Route path="/my-appointments" element={<MyAppointments/>} />
-        <Route path="/my-profile" element={<MyProfile/>} />
-        <Route path="/dashboard-medecin" element={<DoctorDashboard />} />
-        <Route path="/dashboard-admin" element={<AdminDashboard />} />
-        <Route path="/dashboard-medecin/patients" element={<PatientPages />} />
-        <Route path="/dashboard-medecin/prescriptions" element={<PrescriptionsPage />} />
-        <Route path="/dashboard-medecin/appointments" element={<AppointmentsPage />} />
-        <Route path="/dashboard-medecin/availability" element={<AvailabilityPage />} />
-        <Route path="/dashboard-medecin/profile" element={<DoctorProfilePage />} />
-        <Route path="/dashboard-admin/add-doctor" element={<AddDoctor />} />
-        <Route path="/admin/manage-users" element={<ManageUsers />} />
+        <Route path='/doctors' element={<Doctors />} />
+        <Route path='/doctors/:docId' element={<DoctorDetails />} />
 
+        {/* Patient Routes */}
+        <Route
+          path='/my-appointments'
+          element={<ProtectedRoute element={<MyAppointments />} allowedRoles={['patient']} />}
+        />
+        <Route
+          path='/my-profile'
+          element={<ProtectedRoute element={<MyProfile />} allowedRoles={['patient']} />}
+        />
+
+        {/* Doctor Routes */}
+        <Route
+          path='/dashboard-medecin'
+          element={<ProtectedRoute element={<DoctorDashboard />} allowedRoles={['doctor']} />}
+        />
+        <Route
+          path='/dashboard-medecin/patients'
+          element={<ProtectedRoute element={<PatientPages />} allowedRoles={['doctor']} />}
+        />
+        <Route
+          path='/dashboard-medecin/prescriptions'
+          element={<ProtectedRoute element={<PrescriptionsPage />} allowedRoles={['doctor']} />}
+        />
+        <Route
+          path='/dashboard-medecin/appointments'
+          element={<ProtectedRoute element={<AppointmentsPage />} allowedRoles={['doctor']} />}
+        />
+        <Route
+          path='/dashboard-medecin/availability'
+          element={<ProtectedRoute element={<AvailabilityPage />} allowedRoles={['doctor']} />}
+        />
+        <Route
+          path='/dashboard-medecin/profile'
+          element={<ProtectedRoute element={<DoctorProfilePage />} allowedRoles={['doctor']} />}
+        />
+
+        {/* Admin Routes */}
+        <Route
+          path='/dashboard-admin'
+          element={<ProtectedRoute element={<AdminDashboard />} allowedRoles={['admin']} />}
+        />
+        <Route
+          path='/dashboard-admin/add-doctor'
+          element={<ProtectedRoute element={<AddDoctor />} allowedRoles={['admin']} />}
+        />
+        <Route
+          path='/admin/manage-users'
+          element={<ProtectedRoute element={<ManageUsers />} allowedRoles={['admin']} />}
+        />
       </Routes>
+
       <Footer />
     </div>
   )
