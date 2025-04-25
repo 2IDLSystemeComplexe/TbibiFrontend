@@ -259,8 +259,8 @@ const BookAppointmentModal = ({ isOpen, onClose, doctorAvailability, doctorId, o
                             className="form-radio"
                             name="appointmentMode"
                             value="in-person"
-                            checked={appointmentMode === 'in-person'}
-                            onChange={() => setAppointmentMode('in-person')}
+                            checked={appointmentMode === 'en cabinet'}
+                            onChange={() => setAppointmentMode('en cabinet')}
                         />
                         <span className="ml-2">In-Person</span>
                     </label>
@@ -270,8 +270,8 @@ const BookAppointmentModal = ({ isOpen, onClose, doctorAvailability, doctorId, o
                             className="form-radio"
                             name="appointmentMode"
                             value="online"
-                            checked={appointmentMode === 'online'}
-                            onChange={() => setAppointmentMode('online')}
+                            checked={appointmentMode === 'en ligne'}
+                            onChange={() => setAppointmentMode('en ligne')}
                         />
                         <span className="ml-2">Online</span>
                     </label>

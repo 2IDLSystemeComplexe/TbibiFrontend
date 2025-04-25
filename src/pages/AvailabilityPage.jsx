@@ -4,6 +4,7 @@ import Sidebar from '../components/Sidebar';
 import HeaderDashboard from '../components/HeaderDashboard';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import AvailabilityManager from '../components/AvailabilityManager';
 
 const AvailabilityPage = () => {
   const [slots, setSlots] = useState([]);
@@ -33,47 +34,7 @@ const AvailabilityPage = () => {
       <div className="flex-1 bg-gray-100 min-h-screen">
         <HeaderDashboard title="Mes disponibilités" />
         <div className="p-6 max-w-4xl mx-auto">
-          <div className="bg-white rounded shadow p-6 mb-6">
-            <h2 className="text-2xl font-semibold mb-4">🗓️ Sélectionner un jour dans le calendrier</h2>
-            <Calendar
-              onChange={setSelectedDate}
-              value={selectedDate}
-              className="border rounded"
-            />
-            <p className="mt-4 text-gray-700">
-              Date sélectionnée : <strong>{selectedDate.toLocaleDateString()}</strong>
-            </p>
-          </div>
-
-          <div className="bg-white rounded shadow p-6">
-            <h3 className="text-xl font-semibold mb-4">➕ Ajouter une disponibilité</h3>
-            <div className="flex gap-4 mb-4">
-              <div className="flex-1">
-                <label className="block mb-1 text-gray-600">Heure de début</label>
-                <input
-                  type="time"
-                  className="w-full border p-2 rounded"
-                  value={start}
-                  onChange={(e) => setStart(e.target.value)}
-                />
-              </div>
-              <div className="flex-1">
-                <label className="block mb-1 text-gray-600">Heure de fin</label>
-                <input
-                  type="time"
-                  className="w-full border p-2 rounded"
-                  value={end}
-                  onChange={(e) => setEnd(e.target.value)}
-                />
-              </div>
-            </div>
-            <button
-              onClick={addSlot}
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-            >
-              Ajouter le créneau
-            </button>
-          </div>
+          <AvailabilityManager/>
 
           {slots.length > 0 && (
             <div className="bg-white rounded shadow p-6 mt-6">
@@ -95,7 +56,7 @@ const AvailabilityPage = () => {
           )}
         </div>
       </div>
-    </div>
+      </div>
   );
 };
 

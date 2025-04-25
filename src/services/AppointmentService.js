@@ -34,13 +34,11 @@ export const updateAppointmentStatus = async (backendUrl, appointmentId, status)
 };
 
 
-export const bookAppointment = async (backendUrl, token, appointmentData) => {
+export const bookAppointment = async (backendUrl,appointmentData) => {
   const { data } = await axios.post(
-    `${backendUrl}/api/user/book-appointment`,
+    `${backendUrl}/api/appointment/appointments`,
     appointmentData,
-    { headers: { token } }
   );
-  // Handle success and error via toast (show notification, etc.) 
   return data;
 }
 
