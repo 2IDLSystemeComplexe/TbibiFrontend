@@ -24,7 +24,7 @@ const Login = () => {
       data = await loginUser(backendUrl, email, password)
     }
 
-    if (data.message="Login successful") {
+    if (data.message=="Login successful") {
       console.log(data)
       // Save token and user
       localStorage.setItem('token', data.token)
