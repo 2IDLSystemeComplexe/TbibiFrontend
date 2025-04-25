@@ -21,11 +21,12 @@ import AvailabilityPage from './pages/AvailabilityPage'
 import DoctorProfilePage from './pages/DoctorProfilePage'
 import AddDoctor from './pages/AddDoctor'
 import ManageUsers from './pages/ManageUsers'
- 
+import Chatbot from './components/Chatbot'
  const App = () => {
   return (
     <div className='mx-4 sm:mx-[10%]'>
       <ToastContainer />
+      <Chatbot />
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
