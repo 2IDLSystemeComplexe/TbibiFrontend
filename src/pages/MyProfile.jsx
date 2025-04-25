@@ -3,8 +3,6 @@ import { AppContext } from '../context/AppContext';
 import { assets } from '../assets/assets';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { assets } from '../assets/assets';
-
 const PatientProfile = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [image, setImage] = useState(false);

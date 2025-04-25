@@ -5,6 +5,7 @@ import { AppContext } from '../context/AppContext';
 import { FaCheck, FaEdit, FaTrash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import HeaderDashboard from '../components/HeaderDashboard';
 
 const mockUsers = {
   doctor: [
@@ -77,6 +78,7 @@ const handleDelete = async (role, id) => {
       <div className="flex">
         <Sidebar role="admin" />
         <div className="flex-1 bg-gray-100 min-h-screen">
+          <HeaderDashboard title="Gestion utilisateurs" />
           <div className="p-6">
             <div className="mb-6 flex gap-4">
               <button

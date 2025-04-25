@@ -6,12 +6,16 @@ import { getUserAppointments, updateAppointmentStatus } from '../services/Appoin
 import PrescriptionModal from '../components/PrescriptionModal';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import DisplayPrescription from '../components/DisplayPrescription';
+import { getPrescriptionByAppointmentId } from '../services/AppointmentService';
 
 const AppointmentsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [appointments, setAppointments] = useState([]);
   const [selectedAppointment, setSelectedAppointment] = useState({});
   const { backendUrl } = useContext(AppContext);
+   const [isQROpen, setIsQROpen] = useState(false);
+   const[showQRbtn,setShowQRbtn]=useState(false)
 
   useEffect(() => {
     const fetchAppointments = async () => {
@@ -128,7 +132,16 @@ const AppointmentsPage = () => {
   >
     ✔️ Terminer
   </button>
-) : rdv.status === 'Completed' ? (
+) : rdv.status === 'Completed' && showQRbtn? (<button
+  onClick={() => {
+    setSelectedAppointment(rdv);
+    setIsQROpen(true);
+  }}
+    className="text-purple-600 hover:bg-purple-100 p-1 rounded-full text-sm"
+    title="Afficher une prescription"
+  >
+    Afficher ordonnance
+  </button>): rdv.status === 'Completed'&& !showQRbtn? (
   <button
   onClick={() => {
     setSelectedAppointment(rdv);
@@ -138,9 +151,12 @@ const AppointmentsPage = () => {
     className="text-purple-600 hover:bg-purple-100 p-1 rounded-full text-sm"
     title="Créer une prescription"
   >
-    💊 Prescription
+    💊 Ordonnance
   </button>
-) : (
+  
+  
+
+) :(
   <span className="text-gray-400 italic text-sm block">Aucune action</span>
 )}
 
@@ -169,6 +185,12 @@ const AppointmentsPage = () => {
       </div>
      
     </div>
+    {isQROpen && (
+        <DisplayPrescription
+          appointmentId={selectedAppointment._id}
+          closeModal={() => setIsQROpen(false)}
+        />
+      )}
     <PrescriptionModal
   isOpen={isModalOpen}
   onClose={() => setIsModalOpen(false)}
