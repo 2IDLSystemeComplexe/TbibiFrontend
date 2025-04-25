@@ -12,7 +12,7 @@ const Login = () => {
 
 
   const navigate = useNavigate()
-  const { backendUrl } = useContext(AppContext)
+  const { backendUrl, setToken, setUserData } = useContext(AppContext)
 
   const onSubmitHandler = async (event) => {
     event.preventDefault()
@@ -24,11 +24,13 @@ const Login = () => {
       data = await loginUser(backendUrl, email, password)
     }
 
-    if (data.message="Login successful") {
+    if (data.message==="Login successful") {
       console.log(data)
       // Save token and user
-      localStorage.setItem('token', data.token)
-      localStorage.setItem('user', JSON.stringify(data.user))
+      // localStorage.setItem('token', data.token)
+      // localStorage.setItem('user', JSON.stringify(data.user))
+      setToken(data.token)
+      setUserData(data.user)
 
       toast.success('Login successful!')
 

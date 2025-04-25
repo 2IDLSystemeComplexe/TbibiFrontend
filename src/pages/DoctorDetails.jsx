@@ -23,6 +23,7 @@ const DoctorDetails = () => {
     const fetchDocInfo = useCallback(async () => {
         const res = await getDoctorById(backendUrl, docId);
         if (res.success) {
+            console.log(res.doctor);
             setDocInfo(res.doctor);
         } else {
             console.error('Failed to fetch doctor:', res.message);
@@ -119,7 +120,7 @@ const DoctorDetails = () => {
                             <div className='flex items-center gap-2 mt-1 text-gray-600'>
                                 <p>{docInfo.degree} - {docInfo.specialization}</p>
                                 <span className='py-0.5 px-2 border text-xs rounded-full'>
-                                    {docInfo.experience} years experience
+                                    {docInfo.experience} Years experience
                                 </span>
                             </div>
                         </div>
@@ -142,7 +143,7 @@ const DoctorDetails = () => {
                                 About <img className='w-3' src={assets.info_icon} alt="" />
                             </p>
                             <p className='text-gray-600 text-sm leading-relaxed'>
-                                {docInfo.about}
+                                {docInfo.description}
                             </p>
                         </div>
 

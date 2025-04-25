@@ -8,14 +8,15 @@ const Navbar = () => {
   const navigate = useNavigate()
 
   const [showMenu, setShowMenu] = useState(false)
-  const { token, setToken } = useContext(AppContext)
-  const loggedIn = true;
+  const { token, userData, setToken, setUserData} = useContext(AppContext)
+  const loggedIn = token && userData;
+  
   const logout = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
-    setToken(false)
+    setToken('')
+    setUserData(null)
     navigate('/login')
   }
+  
 
   return (
     <div className='flex items-center justify-between text-sm py-4 mb-5 border-b border-b-[#ADADAD]'>
@@ -47,7 +48,11 @@ const Navbar = () => {
           // token && userData 
           loggedIn
             ? <div className='flex items-center gap-2 cursor-pointer group relative'>
-              <img className='w-8 rounded-full' src={assets.logo} alt="" />
+              {/* <img className='w-8 rounded-full' src={assets.logo} alt="" /> */}
+              <div className="flex items-center gap-2">
+                <img className='w-8 rounded-full' src={assets.upload_area} alt="avatar" />
+                <span className="text-sm font-medium text-gray-700">{userData?.username}</span>
+              </div>
               <img className='w-2.5' src={assets.dropdown_icon} alt="" />
               <div className='absolute top-0 right-0 pt-14 text-base font-medium text-gray-600 z-20 hidden group-hover:block'>
                 <div className='min-w-48 bg-gray-50 rounded flex flex-col gap-4 p-4'>
