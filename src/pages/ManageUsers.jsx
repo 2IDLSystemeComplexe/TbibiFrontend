@@ -3,7 +3,8 @@ import Sidebar from '../components/Sidebar';
 import { getUsersByRole } from '../services/adminService';
 import { AppContext } from '../context/AppContext';
 import { FaCheck, FaEdit, FaTrash } from 'react-icons/fa';
-
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const mockUsers = {
   doctor: [
@@ -36,10 +37,28 @@ const ManageUsers = () => {
 };
 
 
-  const handleDelete = (role, id) => {
-    const filtered = users[role].filter((u) => u.id !== id);
+const handleDelete = async (role, id) => {
+  try {
+    if (role === 'doctor') {
+      await axios.delete(`${backendUrl}/api/doctor/${id}`);
+      toast.success('Doctor and their appointments deleted successfully');
+    } else if (role === 'patient') {
+      await axios.delete(`${backendUrl}/api/patients/${id}`);
+      toast.success('Patient and their appointments deleted successfully');
+    } else {
+      toast.error('Invalid role');
+      return;
+    }
+
+    // Mise à jour du state après suppression réussie
+    const filtered = users[role].filter((u) => u._id !== id);
     setUsers({ ...users, [role]: filtered });
-  };
+
+  } catch (error) {
+    console.error(error);
+    toast.error(error.response?.data?.message || 'Failed to delete user');
+  }
+};
 
   const handleVerify = (role, id) => {
     const updated = users[role].map((u) =>

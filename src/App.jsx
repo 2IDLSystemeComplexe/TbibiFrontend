@@ -22,7 +22,6 @@ import DoctorProfilePage from './pages/DoctorProfilePage'
 import AddDoctor from './pages/AddDoctor'
 import ManageUsers from './pages/ManageUsers'
 import ProtectedRoute from './Auth/ProtectedRoute';
-import ConsultationPayment from './pages/Payment'
 const App = () => {
   const location = useLocation()
   const hideNavbarRoutes = [
@@ -34,7 +33,8 @@ const App = () => {
     '/dashboard-medecin/prescriptions',
     '/dashboard-medecin/appointments',
     '/dashboard-medecin/availability',
-    '/dashboard-medecin/profile'
+    '/dashboard-medecin/profile',
+    
   ]
 
   const shouldShowNavbar = !hideNavbarRoutes.includes(location.pathname)
@@ -101,10 +101,6 @@ const App = () => {
         <Route
           path='/admin/manage-users'
           element={<ProtectedRoute element={<ManageUsers />} allowedRoles={['admin']} />}
-        />
-         <Route
-          path='/payment/:appointmentId'
-          element={<ProtectedRoute element={<ConsultationPayment />} allowedRoles={['patient']} />}
         />
       </Routes>
 

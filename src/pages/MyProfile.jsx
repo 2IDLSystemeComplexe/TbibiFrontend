@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../context/AppContext';
-import { updatePatientProfile } from '../services/ProfileService';
 import { assets } from '../assets/assets';
 import { toast } from 'react-toastify';
 import axios from 'axios';

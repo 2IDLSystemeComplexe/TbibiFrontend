@@ -12,6 +12,7 @@ const Navbar = () => {
   const loggedIn = true;
   const logout = () => {
     localStorage.removeItem('token')
+    localStorage.removeItem('user')
     setToken(false)
     navigate('/login')
   }

@@ -13,3 +13,12 @@ export const getUsersByRole = async (backendUrl, role) => {
     throw new Error(error.response?.data?.error || 'Something went wrong');
   }
 };
+export const deleteDoctor = async (id) => {
+  const response = await axios.delete(`${backendUrl}/api/doctor/${id}`);
+  return response.data;
+};
+
+export const deletePatient = async (id) => {
+  const response = await axios.delete(`${backendUrl}/api/patients/${id}`);
+  return response.data;
+};
