@@ -5,13 +5,16 @@ import { toast } from 'react-toastify';
 import { motion } from 'framer-motion';
 import { assets } from '../assets/assets';
 import { getUserAppointments, updateAppointmentStatus } from '../services/AppointmentService';
+import DisplayPrescription from '../components/DisplayPrescription';
+
 
 const MyAppointments = () => {
   const { backendUrl} = useContext(AppContext);
   const navigate = useNavigate();
   const [appointments, setAppointments] = useState([]);
   const [payment, setPayment] = useState('');
-
+   const [isModalOpen, setIsModalOpen] = useState(false);
+const [selectedAppointment, setSelectedAppointment] = useState({});
   
   
   const formatDate = (date) => {
@@ -227,8 +230,13 @@ const MyAppointments = () => {
                     <motion.button
                       whileHover={{ scale: 1.03 }}
                       className="px-4 py-2 bg-green-100 text-green-800 rounded-lg cursor-default"
+                      onClick={() => {
+                        setSelectedAppointment(appointment);
+                        setIsModalOpen(true);
+                        console.log(isModalOpen)
+                      }}
                     >
-                      Appointment Completed
+                     Show prescription
                     </motion.button>
                   )}
 
@@ -269,6 +277,12 @@ const MyAppointments = () => {
             </motion.div>
           ))}
         </motion.div>
+      )}
+       {isModalOpen && (
+        <DisplayPrescription
+          appointmentId={selectedAppointment._id}
+          closeModal={() => setIsModalOpen(false)}
+        />
       )}
     </motion.div>
   );

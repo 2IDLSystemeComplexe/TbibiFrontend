@@ -10,6 +10,7 @@ const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+
   const navigate = useNavigate()
   const { backendUrl } = useContext(AppContext)
 
@@ -23,7 +24,8 @@ const Login = () => {
       data = await loginUser(backendUrl, email, password)
     }
 
-    if (data) {
+    if (data.message="Login successful") {
+      console.log(data)
       // Save token and user
       localStorage.setItem('token', data.token)
       localStorage.setItem('user', JSON.stringify(data.user))

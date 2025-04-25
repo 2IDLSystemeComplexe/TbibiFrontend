@@ -8,10 +8,8 @@ const Navbar = () => {
   const navigate = useNavigate()
 
   const [showMenu, setShowMenu] = useState(false)
-  const { token, setToken, userData } = useContext(AppContext)
-  // TODO: //to be removed when having the API
-  const loggedIn = true; 
-
+  const { token, setToken } = useContext(AppContext)
+  const loggedIn = true;
   const logout = () => {
     localStorage.removeItem('token')
     setToken(false)

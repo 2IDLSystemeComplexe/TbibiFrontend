@@ -22,7 +22,7 @@ import DoctorProfilePage from './pages/DoctorProfilePage'
 import AddDoctor from './pages/AddDoctor'
 import ManageUsers from './pages/ManageUsers'
 import ProtectedRoute from './Auth/ProtectedRoute';
-
+import ConsultationPayment from './pages/Payment'
 const App = () => {
   const location = useLocation()
   const hideNavbarRoutes = [
@@ -101,6 +101,10 @@ const App = () => {
         <Route
           path='/admin/manage-users'
           element={<ProtectedRoute element={<ManageUsers />} allowedRoles={['admin']} />}
+        />
+         <Route
+          path='/payment/:appointmentId'
+          element={<ProtectedRoute element={<ConsultationPayment />} allowedRoles={['patient']} />}
         />
       </Routes>
 

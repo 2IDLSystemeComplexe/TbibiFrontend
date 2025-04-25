@@ -51,6 +51,17 @@ export const cancelAppointment = async (backendUrl, appointmentId) => {
   return data;
 };
 
+export const getPrescriptionByAppointmentId = async (backendUrl, appointmentId) => {
+  try {
+    const response = await axios.get(`${backendUrl}/api/prescription/appointment/${appointmentId}`);
+    console.log(response)
+    return response.data; 
+  } catch (error) {
+    console.error('Error fetching prescription:', error);
+    throw new Error(error.response?.data?.message || 'Failed to fetch prescription');
+  }
+};
+
 export const createRazorpayOrder = async (backendUrl, token, appointmentId) => {
   const { data } = await axios.post(
     `${backendUrl}/api/user/payment-razorpay`,
