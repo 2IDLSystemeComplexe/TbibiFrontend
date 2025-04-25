@@ -35,11 +35,12 @@ export const getDoctorsList = async (backendUrl) => {
       const email = formData.get('email');
       const password = formData.get('password');
       const image = formData.get('image'); // actual file
-      const experience = Number(formData.get('experience'));
+      const experience = formData.get('experience');
       const fees = Number(formData.get('fees'));
       const about = formData.get('about');
       const specialization = formData.get('speciality');
       const degree = formData.get('degree');
+      const phone = formData.get('phone');
   
       // Parse address JSON to get localisation
       const address = JSON.parse(formData.get('address'));
@@ -52,7 +53,10 @@ export const getDoctorsList = async (backendUrl) => {
         password,
         specialization: specialization,
         degree,
-        experience: 9,// Optional: just a reference or base64 string
+        phone,
+        fees,
+        description : about,
+        experience,
         localisation: {
           street: address.line1,
           city: address.line2

@@ -15,6 +15,7 @@ const Doctors = () => {
   const [showFilter, setShowFilter] = useState(false)
   const navigate = useNavigate()
   const { backendUrl } = useContext(AppContext)
+  const available = true
 
   // Get all unique cities from doctors
   const cities = [...new Set(doctors.map(doctor => doctor.localisation.city))].sort()
@@ -165,7 +166,7 @@ const Doctors = () => {
                       <img className='bg-[#EAEFFF]' src={assets.doc1} alt="" />
                       <div className='p-4'>
                           <div className={`flex items-center gap-2 text-sm text-center ${doctor.available ? 'text-green-500' : "text-gray-500"}`}>
-                              <p className={`w-2 h-2 rounded-full ${doctor.available ? 'bg-green-500' : "bg-gray-500"}`}></p><p>{doctor.available ? 'Available' : "Not Available"}</p>
+                              <p className={`w-2 h-2 rounded-full ${available ? 'bg-green-500' : "bg-gray-500"}`}></p><p>{available ? 'Available' : "Not Available"}</p>
                           </div>
                           <p className='text-[#262626] text-lg font-medium'>{doctor.username}</p>
                           <p className='text-[#5C5C5C] text-sm'>{doctor.specialization}</p>

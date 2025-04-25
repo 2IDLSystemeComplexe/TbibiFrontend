@@ -1,81 +1,45 @@
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import axios from 'axios'
+import axios from 'axios';
 
-export const AppContext = createContext()
+export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
 
-    const currencySymbol = '₹'
-    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'
+  const [token, setToken] = useState(localStorage.getItem('token') || '');
+  const [userData, setUserData] = useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null);
 
-    const [doctors, setDoctors] = useState([])
-    const [token, setToken] = useState(localStorage.getItem('token') ? localStorage.getItem('token') : '')
-    const [userData, setUserData] = useState(false)
-
-    // Getting Doctors using API
-    const getDoctosData = async () => {
-
-        // try {
-
-        //     const { data } = await axios.get(backendUrl + '/api/doctor/list')
-        //     if (data.success) {
-        //         setDoctors(data.doctors)
-        //     } else {
-        //         toast.error(data.message)
-        //     }
-
-        // } catch (error) {
-        //     console.log(error)
-        //     toast.error(error.message)
-        // }
-
+  // Keep localStorage in sync
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem('token', token);
+    } else {
+      localStorage.removeItem('token');
     }
+  }, [token]);
 
-    // Getting User Profile using API
-    const loadUserProfileData = async () => {
-
-        try {
-
-            const { data } = await axios.get(backendUrl + '/api/user/get-profile', { headers: { token } })
-
-            if (data.success) {
-                setUserData(data.userData)
-            } else {
-                toast.error(data.message)
-            }
-
-        } catch (error) {
-            console.log(error)
-            toast.error(error.message)
-        }
-
+  useEffect(() => {
+    if (userData) {
+      localStorage.setItem('user', JSON.stringify(userData));
+    } else {
+      localStorage.removeItem('user');
     }
+  }, [userData]);
 
-    useEffect(() => {
-        getDoctosData()
-    }, [])
+  const value = {
+    backendUrl,
+    token,
+    setToken,
+    userData,
+    setUserData,
+  };
 
-    useEffect(() => {
-        if (token) {
-            loadUserProfileData()
-        }
-    }, [token])
+  return (
+    <AppContext.Provider value={value}>
+      {props.children}
+    </AppContext.Provider>
+  );
+};
 
-    const value = {
-        doctors, getDoctosData,
-        currencySymbol,
-        backendUrl,
-        token, setToken,
-        userData, setUserData, loadUserProfileData
-    }
-
-    return (
-        <AppContext.Provider value={value}>
-            {props.children}
-        </AppContext.Provider>
-    )
-
-}
-
-export default AppContextProvider
+export default AppContextProvider;

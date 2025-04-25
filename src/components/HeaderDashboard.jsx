@@ -1,11 +1,20 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef , useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AppContext } from '../context/AppContext';
 
 const HeaderDashboard = ({ title , profileRoute}) => {
   const [username, setUsername] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const dropdownRef = useRef();
+  const { token, userData, setToken, setUserData} = useContext(AppContext)
+  // const loggedIn = token && userData;
+    
+    const handleLogout = () => {
+      setToken('')
+      setUserData(null)
+      navigate('/login')
+    }
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -23,11 +32,11 @@ const HeaderDashboard = ({ title , profileRoute}) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    navigate('/login');
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem('token');
+  //   localStorage.removeItem('user');
+  //   navigate('/login');
+  // };
 
   return (
     <header className="bg-white shadow p-4 flex justify-between items-center">
