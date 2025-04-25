@@ -44,7 +44,10 @@ const PatientProfile = () => {
     
       const handleUpdate = async () => {
         try {
-          await axios.put(`${backendUrl}/api/patients/${patientId}`, formData);
+          console.log(patient)
+          const updatedUser= await axios.put(`${backendUrl}/api/patients/${patientId}`, patient);
+          console.log(updatedUser)
+          fetchPatient();
           toast.success('Profil mis à jour avec succès');
           setIsEdit(false);
         } catch (err) {
@@ -56,28 +59,30 @@ const PatientProfile = () => {
   const userPatient = JSON.parse(localStorage.getItem('user'));
 const patientId = userPatient?._id;
   useEffect(() => {
-      const fetchPatient = async () => {
-        try {
-          const res = await axios.get(`${backendUrl}/api/patients/${patientId}`);
-          setPatient(res.data);
-          setFormData({
-            username: res.data.username || '',
-            email: res.data.email || '',
-            phone:res.data.phone || '',
-            localisation: res.data.localisation || { street: '', city: '' },
-            age: res.data.age || 0,
-            gender: res.data.gender || '',
-          });
-          setLoading(false);
-        } catch (err) {
-          toast.error('Erreur lors du chargement du profil');
-          console.error(err);
-          setLoading(false);
-        }
-      };
+
   
       fetchPatient();
     }, [backendUrl, patientId]);
+  
+    const fetchPatient = async () => {
+      try {
+        const res = await axios.get(`${backendUrl}/api/patients/${patientId}`);
+        setPatient(res.data);
+        setFormData({
+          username: res.data.username || '',
+          email: res.data.email || '',
+          phone:res.data.phone || '',
+          localisation: res.data.localisation || { street: '', city: '' },
+          age: res.data.age || 0,
+          gender: res.data.gender || '',
+        });
+        setLoading(false);
+      } catch (err) {
+        toast.error('Erreur lors du chargement du profil');
+        console.error(err);
+        setLoading(false);
+      }
+    };
 
   return patient ? (
     <div className="flex flex-col gap-2 text-sm pt-5">
@@ -98,7 +103,7 @@ const patientId = userPatient?._id;
       {isEdit ? (
         <input className="bg-gray-50 text-3xl font-medium max-w-60" type="text" onChange={(e) => setPatient(prev => ({ ...prev, username: e.target.value }))} value={patient.username} />
       ) : (
-        <p className="font-medium text-3xl text-[#262626] mt-4">{formData.username}</p>
+        <p className="font-medium text-3xl text-[#262626] mt-4">{patient.username}</p>
       )}
 
       <hr className="bg-[#ADADAD] h-[1px] border-none" />
@@ -113,14 +118,14 @@ const patientId = userPatient?._id;
           <p className="font-medium">Phone:</p>
           {isEdit
             ? <input className="bg-gray-50 max-w-52" type="text" onChange={(e) => setPatient(prev => ({ ...prev, phone: e.target.value }))} value={patient.phone} />
-            : <p className="text-blue-500">{formData.phone}</p>}
+            : <p className="text-blue-500">{patient.phone}</p>}
 
           <p className="font-medium">Address:</p>
           {isEdit ? (
             <p>
-              <input className="bg-gray-50" type="text" onChange={(e) => setPatient(prev => ({ ...prev, localisation: { ...prev.localisation, street: e.target.value } }))} value={formData.localisation.street} />
+              <input className="bg-gray-50" type="text" placeholder='Street' onChange={(e) => setPatient(prev => ({ ...prev, localisation: { ...prev.localisation, street: e.target.value } }))} value={patient.localisation.street} />
               <br />
-              <input className="bg-gray-50" type="text" onChange={(e) => setPatient(prev => ({ ...prev, localisation: { ...prev.localisation, city: e.target.value } }))} value={formData.localisation.city} />
+              <input className="bg-gray-50" type="text" placeholder='City' onChange={(e) => setPatient(prev => ({ ...prev, localisation: { ...prev.localisation, city: e.target.value } }))} value={patient.localisation.city} />
             </p>
           ) : (
             <p className="text-gray-500">{formData.localisation.street} <br /> {formData.localisation.city}</p>
@@ -144,7 +149,7 @@ const patientId = userPatient?._id;
           <p className="font-medium">Age:</p>
           {isEdit
             ? <input className="max-w-28 bg-gray-50" type="number" onChange={(e) => setPatient(prev => ({ ...prev, age: e.target.value }))} value={patient.age} />
-            : <p className="text-gray-500">{patient.dob}</p>}
+            : <p className="text-gray-500">{patient.age}</p>}
         </div>
       </div>
 
