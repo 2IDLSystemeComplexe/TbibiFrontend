@@ -90,7 +90,7 @@ const ChatBotButton = () => {
       <Toaster />
       {!isOpen && (
         <div
-          className="fixed bottom-6 right-6 bg-green-500 rounded-full p-3 cursor-pointer shadow-lg"
+          className="fixed bottom-6 right-6 bg-blue-400 rounded-full p-3 cursor-pointer shadow-lg"
           onClick={handleBubbleClick}
         >
           <img src={assets.logo} alt="Chatbot Icon" className="h-10 w-10" />
@@ -98,8 +98,8 @@ const ChatBotButton = () => {
       )}
   
   {isOpen && (
-  <div className="fixed bottom-20 right-6 z-50 w-[370px] h-[500px] bg-indigo-900 rounded-2xl shadow-xl flex flex-col overflow-hidden">
-    <div className="bg-green-500 px-4 py-3 flex items-center justify-between">
+  <div className="fixed bottom-20 right-6 z-50 w-[370px] h-[500px] bg-indigo-100 rounded-2xl shadow-xl flex flex-col overflow-hidden">
+    <div className="bg-blue-400 px-4 py-3 flex items-center justify-between">
       <h1 className="text-base font-bold text-black">Tbibi Chatbot</h1>
       <button onClick={handlePopupClose} aria-label="Close">
         <IoMdClose />
@@ -114,7 +114,7 @@ const ChatBotButton = () => {
           className={`p-3 rounded-lg max-w-[80%] ${
             message.sender === "user"
               ? "bg-blue-600 ml-auto text-white"
-              : "bg-green-500 text-black"
+              : "bg-blue-400 text-black"
           }`}
         >
           {message.text}
@@ -122,27 +122,27 @@ const ChatBotButton = () => {
       ))}
 
       {loading && (
-        <div className="bg-green-500 text-black p-3 rounded-lg w-fit">
+        <div className="bg-blue-400 text-black p-3 rounded-lg w-fit">
           Bot is typing <span className="animate-pulse">...</span>
         </div>
       )}
       <div ref={messagesEndRef} />
     </div>
 
-    <div className="border-t border-gray-700" />
+    <div className="border-t border-gray-300" />
 
-    <div className="flex items-center p-4 bg-indigo-900">
+    <div className="flex items-center p-4 bg-indigo-100">
       <input
         type="text"
         placeholder="Type a message..."
         value={inputValue}
         onChange={handleInputChange}
         onKeyPress={handleKeyPress}
-        className="flex-grow p-2 rounded-md bg-gray-800 text-white border border-gray-600 focus:outline-none"
+        className="flex-grow p-2 rounded-md bg-gray-500 text-white border border-gray-300 focus:outline-none"
       />
       <button
         onClick={handleSendMessage}
-        className="ml-2 bg-green-500 hover:bg-green-400 text-black p-2 rounded-md"
+        className="ml-2 bg-blue-400 hover:bg-blue-500 text-black p-2 rounded-md"
       >
         <IoIosSend />
 
