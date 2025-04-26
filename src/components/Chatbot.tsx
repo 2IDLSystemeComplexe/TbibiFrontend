@@ -8,9 +8,42 @@ import { IoIosSend } from "react-icons/io";
 const apiUrl = import.meta.env.VITE_CHATBOT_URL;
 
 
-const generateBotResponse = async (userInput: string) => {
+const generateBotResponse = async (userInput: string, useSimplePrompt = false) => {
   try {
-    const systemInstruction = "You are a helpful doctor's assistant. Please assist the user accordingly.";
+    let systemInstruction;
+    if(useSimplePrompt){
+      systemInstruction = "You are a helpful doctor's assistant. Please assist the user accordingly.";
+
+    }else{
+    systemInstruction = `
+    You are a helpful doctor's assistant. Please assist the user accordingly. 
+    
+    For simple symptoms like common cold, minor headaches, or small cuts:
+    - Provide basic treatment advice and home remedies
+    - Suggest over-the-counter medications when appropriate
+    - Mention when symptoms should resolve
+    
+    For more complex symptoms or conditions that require professional diagnosis:
+    - Explain why the symptoms need professional evaluation
+    - Suggest the appropriate specialist from the list below
+    
+    If the user wants or needs a doctor suggestion, recommend one of the following specialists based on their symptoms:
+    
+    Dr. Maha Houidi - Dermatologist - For skin issues, rashes, acne, etc.
+    City: Sfax - Street: Rue Ibn Khaldoun - Phone: +21650444555
+    
+    Dr. Roua Mahmoudi - Neurologist - For headaches, dizziness, numbness, etc.
+    City: Ariena - Street: Rue Ibn Khaldoun - Phone: +21650444555
+    
+    Dr. Sara Hosni - Cardiologist - For chest pain, palpitations, etc.
+    City: Kairouan - Street: 123 Rue Habib Bourguiba - Phone: +212634567890
+    
+    Dr. Hazem Hammami - General Practitioner - For general health concerns or unsure cases
+    City: Ezzahra - Street: Hay el Habib - Phone: +212634567890
+    
+    Always remind users that this is not a substitute for professional medical advice, and they should seek immediate medical attention for any severe symptoms.
+    `; 
+    }
     const fullPrompt = `${systemInstruction}\n\nUser: ${userInput}`;
     
     const apiURL = `${apiUrl}/chatbot/generate?user_prompt=${encodeURIComponent(
@@ -69,15 +102,30 @@ const ChatBotButton = () => {
       setInputValue("");
       setLoading(true);
       try {
-        const botResponse = await generateBotResponse(inputValue);
+        let botResponse = await generateBotResponse(inputValue, false);
+        
+        // If response is empty, try again with simple prompt
+        if (!botResponse || botResponse.trim() === "") {
+          console.log("First attempt returned empty response, trying with simple prompt...");
+
+          botResponse = await generateBotResponse(inputValue, true)
+        }
+        // Check if the response is empty and set a fallback message
+        if (!botResponse || botResponse.trim() === "") {
+          
+          botResponse = "Sorry, I couldn't understand your request.";
+        }
         setMessages([...newMessages, { sender: "bot", text: botResponse }]);
       } catch (error) {
         console.error("Error generating bot response:", error);
+        // Add a fallback message in case of error
+        setMessages([...newMessages, { sender: "bot", text: "Sorry, I couldn't understand your request." }]);
       } finally {
         setLoading(false);
       }
     }
   };
+
 
   const handleKeyPress = (e: any) => {
     if (e.key === "Enter") {
@@ -98,7 +146,7 @@ const ChatBotButton = () => {
       )}
   
   {isOpen && (
-  <div className="fixed bottom-20 right-6 z-50 w-[370px] h-[500px] bg-indigo-100 rounded-2xl shadow-xl flex flex-col overflow-hidden">
+  <div className="fixed bottom-20 right-6 z-50 w-[670px] h-[500px] bg-indigo-100 rounded-2xl shadow-xl flex flex-col overflow-hidden">
     <div className="bg-blue-400 px-4 py-3 flex items-center justify-between">
       <h1 className="text-base font-bold text-black">Tbibi Chatbot</h1>
       <button onClick={handlePopupClose} aria-label="Close">
