@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Sidebar from '../components/Sidebar';
-
+import { getUsersByRole } from '../services/adminService';
+import { AppContext } from '../context/AppContext';
+import { FaCheck, FaEdit, FaTrash } from 'react-icons/fa';
+import { toast } from 'react-toastify';
+import axios from 'axios';
+import HeaderDashboard from '../components/HeaderDashboard';
 
 const mockUsers = {
   doctor: [
@@ -16,14 +21,45 @@ const mockUsers = {
   ]
 };
 
+
 const ManageUsers = () => {
   const [activeTab, setActiveTab] = useState('doctor');
-  const [users, setUsers] = useState(mockUsers);
+  const [users, setUsers] = useState();
+ const { backendUrl } = useContext(AppContext)
 
-  const handleDelete = (role, id) => {
-    const filtered = users[role].filter((u) => u.id !== id);
+ const fetchUsers = async (role) => {
+  try {
+    const data = await getUsersByRole(backendUrl, role);
+    setUsers(data);
+  } catch (err) {
+    console.error(err);
+    setUsers([]);
+  } 
+};
+
+
+const handleDelete = async (role, id) => {
+  try {
+    if (role === 'doctor') {
+      await axios.delete(`${backendUrl}/api/doctor/${id}`);
+      toast.success('Doctor and their appointments deleted successfully');
+    } else if (role === 'patient') {
+      await axios.delete(`${backendUrl}/api/patients/${id}`);
+      toast.success('Patient and their appointments deleted successfully');
+    } else {
+      toast.error('Invalid role');
+      return;
+    }
+
+    // Mise à jour du state après suppression réussie
+    const filtered = users[role].filter((u) => u._id !== id);
     setUsers({ ...users, [role]: filtered });
-  };
+
+  } catch (error) {
+    console.error(error);
+    toast.error(error.response?.data?.message || 'Failed to delete user');
+  }
+};
 
   const handleVerify = (role, id) => {
     const updated = users[role].map((u) =>
@@ -32,101 +68,97 @@ const ManageUsers = () => {
     setUsers({ ...users, [role]: updated });
   };
 
+  useEffect(() => {
+      fetchUsers(activeTab)
+      console.log(users)
+
+    }, [activeTab])
+
   return (
-    <div className="flex">
-      <Sidebar role="admin" />
-      <div className="flex-1 bg-gray-100 min-h-screen">
-        
-
-        <div className="p-6">
-          <div className="mb-6 flex gap-4">
-            <button
-              onClick={() => setActiveTab('doctor')}
-              className={`px-4 py-2 rounded ${
-                activeTab === 'doctor' ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 border'
-              }`}
-            >
-              Médecins
-            </button>
-            <button
-              onClick={() => setActiveTab('pharmacist')}
-              className={`px-4 py-2 rounded ${
-                activeTab === 'pharmacist' ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 border'
-              }`}
-            >
-              Pharmaciens
-            </button>
-            <button
-              onClick={() => setActiveTab('patient')}
-              className={`px-4 py-2 rounded ${
-                activeTab === 'patient' ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 border'
-              }`}
-            >
-              Patients
-            </button>
-          </div>
-
-          <div className="bg-white rounded shadow overflow-x-auto">
-            <table className="min-w-full border">
-              <thead className="bg-gray-100 text-gray-600 uppercase text-sm">
-                <tr>
-                  <th className="text-left p-3 border">Nom</th>
-                  <th className="text-left p-3 border">Email</th>
-                  {activeTab !== 'patient' && <th className="text-left p-3 border">Statut</th>}
-                  <th className="text-left p-3 border">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {users[activeTab].map((user) => (
-                  <tr key={user.id} className="hover:bg-gray-50">
-                    <td className="p-3 border">{user.name}</td>
-                    <td className="p-3 border">{user.email}</td>
-                    {activeTab !== 'patient' && (
-                      <td className="p-3 border">
-                        {user.verified ? (
-                          <span className="text-green-600">✅ Vérifié</span>
-                        ) : (
-                          <span className="text-yellow-600">⏳ En attente</span>
-                        )}
-                      </td>
-                    )}
-                    <td className="p-3 border space-x-2">
-                      {activeTab !== 'patient' && !user.verified && (
-                        <button
-                          onClick={() => handleVerify(activeTab, user.id)}
-                          className="bg-green-600 text-white px-3 py-1 rounded text-sm"
-                        >
-                          Valider
-                        </button>
-                      )}
-                      <button
-                        onClick={() => alert('Modifier (à implémenter)')}
-                        className="bg-blue-600 text-white px-3 py-1 rounded text-sm"
-                      >
-                        Modifier
-                      </button>
-                      <button
-                        onClick={() => handleDelete(activeTab, user.id)}
-                        className="bg-red-600 text-white px-3 py-1 rounded text-sm"
-                      >
-                        Supprimer
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-                {users[activeTab].length === 0 && (
+      <div className="flex">
+        <Sidebar role="admin" />
+        <div className="flex-1 bg-gray-100 min-h-screen">
+          <HeaderDashboard title="Gestion utilisateurs" />
+          <div className="p-6">
+            <div className="mb-6 flex gap-4">
+              <button
+                onClick={() => setActiveTab('doctor')}
+                className={`px-4 py-2 rounded ${
+                  activeTab === 'doctor'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-white text-gray-600 border'
+                }`}
+              >
+                Médecins
+              </button>
+              <button
+                onClick={() => setActiveTab('pharmacist')}
+                className={`px-4 py-2 rounded ${
+                  activeTab === 'pharmacist'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-white text-gray-600 border'
+                }`}
+              >
+                Pharmaciens
+              </button>
+              <button
+                onClick={() => setActiveTab('patient')}
+                className={`px-4 py-2 rounded ${
+                  activeTab === 'patient'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-white text-gray-600 border'
+                }`}
+              >
+                Patients
+              </button>
+            </div>
+  
+            <div className="bg-white rounded shadow overflow-x-auto">
+              <table className="min-w-full border">
+                <thead className="bg-gray-100 text-gray-600 uppercase text-sm">
                   <tr>
-                    <td colSpan="4" className="text-center text-gray-500 p-4">
-                      Aucun utilisateur dans cette catégorie.
-                    </td>
+                    <th className="text-left p-3 border">Nom</th>
+                    <th className="text-left p-3 border">Email</th>
+                    <th className="text-left p-3 border">Actions</th>
                   </tr>
-                )}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {users?.length > 0 ? (
+                    users.map((user) => (
+                      <tr key={user._id} className="hover:bg-gray-50">
+                        <td className="p-3 border">{user.username}</td>
+                        <td className="p-3 border">{user.email}</td>
+                        <td className="p-3 border space-x-2 flex items-center">
+                          <button
+                            onClick={() => alert('Modifier (à implémenter)')}
+                            className="text-blue-600 hover:text-blue-800"
+                            title="Modifier"
+                          >
+                            <FaEdit />
+                          </button>
+                          <button
+                            onClick={() => handleDelete(activeTab, user._id)}
+                            className="text-red-600 hover:text-red-800"
+                            title="Supprimer"
+                          >
+                            <FaTrash />
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="4" className="text-center text-gray-500 p-4">
+                        Aucun utilisateur dans cette catégorie.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

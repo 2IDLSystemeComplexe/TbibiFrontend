@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { AppContext } from '../context/AppContext'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
@@ -10,8 +10,9 @@ const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+
   const navigate = useNavigate()
-  const { backendUrl, token, setToken } = useContext(AppContext)
+  const { backendUrl, setToken, setUserData } = useContext(AppContext)
 
   const onSubmitHandler = async (event) => {
     event.preventDefault()
@@ -23,19 +24,29 @@ const Login = () => {
       data = await loginUser(backendUrl, email, password)
     }
 
-    if (data.success) {
-      localStorage.setItem('token', data.token)
+    if (data.message==="Login successful") {
+      console.log(data)
+      // Save token and user
+      // localStorage.setItem('token', data.token)
+      // localStorage.setItem('user', JSON.stringify(data.user))
       setToken(data.token)
+      setUserData(data.user)
+
+      toast.success('Login successful!')
+
+      // Redirect based on role
+      const role = data.user.role
+      if (role === 'doctor') {
+        navigate('/dashboard-medecin')
+      } else if (role === 'admin') {
+        navigate('/dashboard-admin')
+      } else {
+        navigate('/')
+      }
     } else {
-      toast.error(data.message)
+      toast.error(data.message || 'Something went wrong')
     }
   }
-
-  useEffect(() => {
-    if (token) {
-      navigate('/')
-    }
-  }, [token])
 
   return (
     <form onSubmit={onSubmitHandler} className='min-h-[80vh] flex items-center'>
@@ -45,7 +56,7 @@ const Login = () => {
         </p>
 
         {state === 'Sign Up' && (
-          <div className='w-full '>
+          <div className='w-full'>
             <p>Full Name</p>
             <input
               onChange={(e) => setName(e.target.value)}
@@ -57,7 +68,7 @@ const Login = () => {
           </div>
         )}
 
-        <div className='w-full '>
+        <div className='w-full'>
           <p>Email</p>
           <input
             onChange={(e) => setEmail(e.target.value)}
@@ -67,7 +78,8 @@ const Login = () => {
             required
           />
         </div>
-        <div className='w-full '>
+
+        <div className='w-full'>
           <p>Password</p>
           <input
             onChange={(e) => setPassword(e.target.value)}

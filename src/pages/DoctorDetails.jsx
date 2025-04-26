@@ -1,10 +1,13 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { doctors, assets } from '../assets/assets';
+import { assets } from '../assets/assets';
 import RelatedDoctors from '../components/RelatedDoctos';
 import BookAppointmentModal from '../components/BookAppointmentModal';
 import { motion } from 'framer-motion';
-
+import { getDoctorById } from '../services/DoctorService';
+import { AppContext } from '../context/AppContext'
+import { bookAppointment } from '../services/AppointmentService';
+import { toast } from 'react-toastify';
 const DoctorDetails = () => {
     const doctorAvailability1 = useMemo(() => [
         { day: 'Monday', start: '09:00', end: '17:00' },
@@ -15,36 +18,70 @@ const DoctorDetails = () => {
     const { docId } = useParams();
     const [docInfo, setDocInfo] = useState({});
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const { backendUrl } = useContext(AppContext)
 
-    const fetchDocInfo = useCallback(() => {
-        const foundDoctor = doctors.find((doc) => doc._id === docId);
-        if (foundDoctor) {
-            setDocInfo(foundDoctor);
+    const fetchDocInfo = useCallback(async () => {
+        const res = await getDoctorById(backendUrl, docId);
+        if (res.success) {
+            console.log(res.doctor);
+            setDocInfo(res.doctor);
+        } else {
+            console.error('Failed to fetch doctor:', res.message);
         }
     }, [docId]);
 
-    const handleBookAppointment = useCallback(async (appointmentData) => {
+
+    const formatDate = (dateObj) => {
+        const d = new Date(dateObj);
+        return d.toISOString().split('T')[0]; // 'YYYY-MM-DD'
+      };
+      
+      const formatTime = (timeString) => {
+        const [time, modifier] = timeString.split(' ');
+        let [hours, minutes] = time.split(':');
+      
+        if (modifier === 'PM' && hours !== '12') hours = String(+hours + 12);
+        if (modifier === 'AM' && hours === '12') hours = '00';
+      
+        return `${hours}:${minutes}`;
+      };
+      
+
+    const handleBookAppointment = async (appointmentData) => {
         try {
-            console.log('Booking successful:', appointmentData);
-            setIsModalOpen(false);
+          const storedUser = localStorage.getItem('user');
+          const patient = storedUser ? JSON.parse(storedUser) : null;
+      
+          if (!patient?._id) {
+            toast.error("You must be logged in to book an appointment.");
+            return;
+          }
+      
+          const payload = {
+            doctorId: docInfo._id, 
+            patientId: patient._id,
+            date: formatDate(appointmentData.date),
+            time: formatTime(appointmentData.time),
+            mode: appointmentData.mode, 
+          };
+      
+          console.log("Booking payload:", payload); 
+      
+          const response = await bookAppointment(backendUrl, payload);
+          toast.success("Appointment booked successfully!");
+          setIsModalOpen(false);
         } catch (error) {
-            console.error('Booking failed:', error);
+          toast.error("Failed to book appointment.");
+          console.error("Booking error:", error);
         }
-    }, [docId]);
+      };
+      
 
-    const handleBookAppointmentClick = useCallback(() => {
-        setIsModalOpen(true);
-    }, []);
-
-    const handleModalClose = useCallback(() => {
-        setIsModalOpen(false);
-    }, []);
+      
 
     useEffect(() => {
-        if (doctors.length > 0) {
-            fetchDocInfo();
-        }
-    }, [doctors, docId, fetchDocInfo]);
+        fetchDocInfo();
+    }, [fetchDocInfo]);
 
     return (
         <div className='px-4 py-8'>
@@ -62,8 +99,8 @@ const DoctorDetails = () => {
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.2, duration: 0.5 }}
                         className='w-full h-full object-cover'
-                        src={docInfo.image} 
-                        alt={docInfo.name} 
+                        src={assets.doc1} 
+                        alt={docInfo.username} 
                     />
                 </div>
 
@@ -77,13 +114,13 @@ const DoctorDetails = () => {
                     <div className='space-y-4'>
                         <div>
                             <p className='flex items-center gap-2 text-2xl font-semibold text-gray-800'>
-                                {docInfo.name} 
+                                {docInfo.username} 
                                 <img className='w-5' src={assets.verified_icon} alt="Verified" />
                             </p>
                             <div className='flex items-center gap-2 mt-1 text-gray-600'>
                                 <p>{docInfo.degree} - {docInfo.specialization}</p>
                                 <span className='py-0.5 px-2 border text-xs rounded-full'>
-                                    {docInfo.experience} years experience
+                                    {docInfo.experience} Years experience
                                 </span>
                             </div>
                         </div>
@@ -106,7 +143,7 @@ const DoctorDetails = () => {
                                 About <img className='w-3' src={assets.info_icon} alt="" />
                             </p>
                             <p className='text-gray-600 text-sm leading-relaxed'>
-                                {docInfo.about}
+                                {docInfo.description}
                             </p>
                         </div>
 
@@ -118,7 +155,7 @@ const DoctorDetails = () => {
                                 <motion.button
                                     whileHover={{ scale: 1.03 }}
                                     whileTap={{ scale: 0.98 }}
-                                    onClick={handleBookAppointmentClick}
+                                    onClick={() => setIsModalOpen(true)}
                                     className="w-full sm:w-auto bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-6 rounded-lg shadow-md transition-all duration-200"
                                 >
                                     Book Appointment
@@ -131,7 +168,7 @@ const DoctorDetails = () => {
             
             <BookAppointmentModal
                 isOpen={isModalOpen}
-                onClose={handleModalClose}
+                onClose={() => setIsModalOpen(false)}
                 doctorAvailability={doctorAvailability1}
                 doctorId={docInfo._id}
                 onSubmit={handleBookAppointment}

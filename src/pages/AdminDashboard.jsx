@@ -10,7 +10,7 @@ const AdminDashboard = () => {
       <Sidebar role="admin" />
 
       <div className="flex-1 bg-gray-100 min-h-screen">
-        <HeaderDashboard title="Dashboard Administrateur" />
+        <HeaderDashboard title="Dashboard Administrateur" profileRoute='/dashboard-admin'/>
 
         <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Card title="Utilisateurs" value="203" icon="👥" />
