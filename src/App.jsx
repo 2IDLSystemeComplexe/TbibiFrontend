@@ -22,6 +22,8 @@ import DoctorProfilePage from './pages/DoctorProfilePage'
 import AddDoctor from './pages/AddDoctor'
 import ManageUsers from './pages/ManageUsers'
 import ProtectedRoute from './Auth/ProtectedRoute';
+import Chatbot from './components/Chatbot'
+
 const App = () => {
   const location = useLocation()
   const hideNavbarRoutes = [
@@ -42,8 +44,8 @@ const App = () => {
   return (
     <div className='mx-4 sm:mx-[10%]'>
       <ToastContainer />
+    <Chatbot />
       {shouldShowNavbar && <Navbar />}
-
       <Routes>
         {/* Public Routes */}
         <Route path='/' element={<Home />} />
