@@ -56,6 +56,7 @@ const AppointmentsPage = () => {
       if (!response) throw new Error('Failed to create prescription');
       toast.success("Prescription created successfully!");
       setIsModalOpen(false);
+      setShowQRbtn(true)
     } catch (error) {
       toast.error("Failed to create prescription.");
       console.error("Prescription error:", error);
