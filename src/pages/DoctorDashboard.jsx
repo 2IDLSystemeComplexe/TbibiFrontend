@@ -40,8 +40,8 @@ const DoctorDashboard = () => {
             <p className="text-gray-700 mb-4">Signer électroniquement vos ordonnances avec TunTrust.</p>
             <button className="bg-green-600 text-white px-4 py-2 rounded">Signer une ordonnance</button>
           </section>
-          <section>  <PendingAppointments />
-          <AvailabilityManager /></section>
+          {/* <section>  <PendingAppointments />
+          <AvailabilityManager /></section> */}
         </div>
       </div>
     </div>

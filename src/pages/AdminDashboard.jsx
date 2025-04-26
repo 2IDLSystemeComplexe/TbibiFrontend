@@ -13,9 +13,9 @@ const AdminDashboard = () => {
         <HeaderDashboard title="Dashboard Administrateur" profileRoute='/dashboard-admin'/>
 
         <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Card title="Utilisateurs" value="203" icon="👥" />
-          <Card title="Médecins inscrits" value="57" icon="🩺" />
-          <Card title="Rendez-vous aujourd'hui" value="34" icon="📅" />
+          <Card title="Utilisateurs" value="20" icon="👥" />
+          <Card title="Médecins inscrits" value="12" icon="🩺" />
+          <Card title="Rendez-vous aujourd'hui" value="5" icon="📅" />
           <Card title="Comptes signalés" value="2" icon="⚠️" />
         </div>
 
